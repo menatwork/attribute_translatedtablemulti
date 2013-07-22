@@ -8,8 +8,15 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2013-07-01T00:11:52+02:00
+ * last-updated: 2013-07-02T12:17:56+02:00
  */
 
-
-$GLOBALS['TL_LANG']['tl_metamodel_attribute']['tabletext_rowLabel']['0'] = 'Etichetta';
+$GLOBALS['TL_LANG']['tl_metamodel_attribute']['tabletext_cols']['0']                = 'Colonna configurazione';
+$GLOBALS['TL_LANG']['tl_metamodel_attribute']['tabletext_cols']['1']                = 'Inserire un\'etichetta e la larghezza per ogni colonna.';
+$GLOBALS['TL_LANG']['tl_metamodel_attribute']['tabletext_quantity_cols']['0']       = 'Numero di colonne';
+$GLOBALS['TL_LANG']['tl_metamodel_attribute']['tabletext_quantity_cols']['1']       = 'Selezionare il numero di colonne.';
+$GLOBALS['TL_LANG']['tl_metamodel_attribute']['tabletext_rowLabel']['0']            = 'Etichetta';
+$GLOBALS['TL_LANG']['tl_metamodel_attribute']['tabletext_rowLabel']['1']            = 'Inserire le etichette per le colonne';
+$GLOBALS['TL_LANG']['tl_metamodel_attribute']['tabletext_rowStyle']['0']            = 'Larghezza';
+$GLOBALS['TL_LANG']['tl_metamodel_attribute']['tabletext_rowStyle']['1']            = 'Inserire la larghezza delle colonne (es. 200px)';
+$GLOBALS['TL_LANG']['tl_metamodel_attribute']['typeOptions']['translatedtabletext'] = 'Traduci i testi della tabella';
