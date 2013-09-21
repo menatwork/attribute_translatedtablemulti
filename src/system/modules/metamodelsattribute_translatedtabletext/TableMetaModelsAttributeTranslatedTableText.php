@@ -15,6 +15,9 @@
  * @filesource
  */
 
+use MetaModels\Dca\Attribute as TableMetaModelAttribute;
+use MetaModels\Factory as MetaModelFactory;
+
 /**
  * This is the helper class for handling translated table text fields.
  *

@@ -16,6 +16,10 @@
  * @filesource
  */
 
+use MetaModels\Attribute\Base;
+use MetaModels\Attribute\ITranslated;
+use MetaModels\Attribute\IComplex;
+
 /**
  * This is the MetaModelAttribute class for handling translated table text fields.
  *
@@ -24,7 +28,7 @@
  * @author     David Maack <david.maack@arcor.de>
  * @author     Stefan Heimes <stefan_heimes@hotmail.com>
  */
-class MetaModelAttributeTranslatedTableText extends MetaModelAttribute implements IMetaModelAttributeTranslated, IMetaModelAttributeComplex
+class MetaModelAttributeTranslatedTableText extends Base implements ITranslated, IComplex
 {
 
 	public function getAttributeSettingNames()
