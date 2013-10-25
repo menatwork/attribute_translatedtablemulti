@@ -66,7 +66,7 @@ class MetaModelAttributeTranslatedTableText extends MetaModelAttribute implement
 
 		for ($i = 0; $i < count($arrColLabels); $i++)
 		{
-			$arrFieldDef['eval']['columnFields'][$i] = array(
+			$arrFieldDef['eval']['columnFields']['col_'.$i] = array(
 				'label' => $arrColLabels[$i]['rowLabel'],
 				'inputType' => 'text',
 				'eval' => array(),
@@ -74,7 +74,7 @@ class MetaModelAttributeTranslatedTableText extends MetaModelAttribute implement
 
 			if ($arrColLabels[$i]['rowStyle'])
 			{
-				$arrFieldDef['eval']['columnFields'][$i]['eval']['style'] = 'width:' . $arrColLabels[$i]['rowStyle'];
+				$arrFieldDef['eval']['columnFields']['col_'.$i]['eval']['style'] = 'width:' . $arrColLabels[$i]['rowStyle'];
 			}
 		}
 
@@ -136,7 +136,7 @@ class MetaModelAttributeTranslatedTableText extends MetaModelAttribute implement
 		{
 			foreach ($row as $key => $col)
 			{
-				$widgetValue[$col['row']][$key] = $col['value'];
+				$widgetValue[$col['row']]['col_'.$key] = $col['value'];
 			}
 		}
 		return $widgetValue;
@@ -154,6 +154,7 @@ class MetaModelAttributeTranslatedTableText extends MetaModelAttribute implement
 		{
 			foreach ($row as $kk => $col)
 			{
+				$kk = str_replace('col_', '', $kk);
 				$newValue[$k][$kk]['value'] = $col;
 				$newValue[$k][$kk]['col'] = $kk;
 				$newValue[$k][$kk]['row'] = $k;
