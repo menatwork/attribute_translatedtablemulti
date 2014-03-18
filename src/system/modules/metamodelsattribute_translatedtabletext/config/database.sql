@@ -31,5 +31,5 @@ CREATE TABLE `tl_metamodel_translatedtabletext` (
 
 CREATE TABLE `tl_metamodel_attribute` (
   `translatedtabletext_cols` blob NULL,
-  `tabletext_quantity_cols` varchar(2) NOT NULL default '',
+  `tabletext_quantity_cols` varchar(2) NOT NULL default ''
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

@@ -24,29 +24,67 @@ $GLOBALS['TL_DCA']['tl_metamodel_attribute']['metapalettes']['translatedtabletex
 	'+advanced' => array('tabletext_quantity_cols', 'translatedtabletext_cols'),
 );
 
-$GLOBALS['TL_DCA']['tl_metamodel_attribute']['config']['onload_callback'][] = array('TableMetaModelsAttributeTranslatedTableText', 'loadTableTextCols');
-
 $GLOBALS['TL_DCA']['tl_metamodel_attribute']['fields']['tabletext_quantity_cols'] = array
 	(
-	'label' => &$GLOBALS['TL_LANG']['tl_metamodel_attribute']['tabletext_quantity_cols'],
-	'exclude' => true,
+	'label'     => &$GLOBALS['TL_LANG']['tl_metamodel_attribute']['tabletext_quantity_cols'],
+	'exclude'   => true,
 	'inputType' => 'select',
-	'options' => array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
-	'eval' => array('tl_class' => 'clr m12','alwaysSave' => true, 'submitOnChange' => true),
+	'default'   => 1,
+	'options'   => array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+	'eval'      => array('tl_class' => 'clr m12','alwaysSave' => true, 'submitOnChange' => true),
 );
 
 $GLOBALS['TL_DCA']['tl_metamodel_attribute']['fields']['translatedtabletext_cols'] = array
 	(
-	'label' => &$GLOBALS['TL_LANG']['tl_metamodel_attribute']['tabletext_cols'],
-	'exclude' => true,
+	'label'     => &$GLOBALS['TL_LANG']['tl_metamodel_attribute']['tabletext_cols'],
+	'exclude'   => true,
 	'inputType' => 'multiColumnWizard',
-	'load_callback' => array
-		(
-		array('TableMetaModelsAttributeTranslatedTableText', 'loadValues')
-	),
-	'save_callback' => array
-		(
-		array('TableMetaModelsAttributeTranslatedTableText', 'saveValues')
-	),
-	'eval' => array()
+	'eval'      => array
+	(
+		'disableSorting'                     => true,
+		'tl_class'                           => 'clr',
+		'columnFields'                       => array(
+			'langcode'                       => array(
+				'exclude'                    => true,
+				'inputType'                  => 'justtextoption',
+				'eval'                       => array
+				(
+					'style'                  => 'min-width:75px;display:block;padding-top:28px;',
+					'valign'                 => 'top'
+				)
+			),
+			'rowLabels'                     => array
+			(
+				'exclude'                    => true,
+				'inputType'                  => 'multiColumnWizard',
+				'eval'                       => array
+				(
+					'disableSorting'         => true,
+					'tl_class'               => 'clr',
+					'columnFields'           => array
+					(
+						'rowLabel'           => array
+						(
+							'exclude'        => true,
+							'inputType'      => 'text',
+							'eval'           => array
+							(
+								'style'      => 'width:400px;',
+								'rows'       => 2
+							)
+						),
+						'rowStyle'           => array
+						(
+							'inputType'      => 'text',
+							'eval'           => array
+							(
+								'allowHtml'  => false,
+								'style'      => 'width: 90px;'
+							)
+						)
+					)
+				)
+			)
+		)
+	)
 );
