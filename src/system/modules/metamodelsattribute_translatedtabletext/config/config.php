@@ -17,6 +17,8 @@
  */
 
 $GLOBALS['METAMODELS']['attributes']['translatedtabletext']['class'] = 'MetaModelAttributeTranslatedTableText';
-$GLOBALS['METAMODELS']['attributes']['translatedtabletext']['image'] = 'system/modules/metamodelsattribute_translatedtabletext/html/translatedtabletext.png';
+$GLOBALS['METAMODELS']['attributes']['translatedtabletext']['image'] =
+	'system/modules/metamodelsattribute_translatedtabletext/html/translatedtabletext.png';
 
-$GLOBALS['TL_EVENTS'][\DcGeneral\Factory\Event\BuildDataDefinitionEvent::NAME . '[tl_metamodel_attribute]'][] = 'DcGeneral\Events\Table\Attribute\TranslatedTableText\TranslatedTableTextCols::registerEvents';
+$GLOBALS['TL_EVENTS']['dc-general.factory.build-data-definition[tl_metamodel_attribute]'][] =
+	'DcGeneral\Events\Table\Attribute\TranslatedTableText\TranslatedTableTextCols::registerEvents';
