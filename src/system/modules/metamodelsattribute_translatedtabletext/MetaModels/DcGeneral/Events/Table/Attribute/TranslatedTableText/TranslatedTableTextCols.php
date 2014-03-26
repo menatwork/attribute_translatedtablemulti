@@ -15,7 +15,7 @@
  * @filesource
  */
 
-namespace DcGeneral\Events\Table\Attribute\TranslatedTableText;
+namespace MetaModels\DcGeneral\Events\Table\Attribute\TranslatedTableText;
 
 use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
 use ContaoCommunityAlliance\Contao\Bindings\Events\System\LoadLanguageFileEvent;
