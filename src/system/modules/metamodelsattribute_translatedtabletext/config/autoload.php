@@ -17,16 +17,6 @@
  */
 
 /**
- * Register the classes
- */
-ClassLoader::addClasses(array
-(
-	'MetaModelAttributeTranslatedTableText'       => 'system/modules/metamodelsattribute_translatedtabletext/MetaModelAttributeTranslatedTableText.php',
-	'TableMetaModelsAttributeTranslatedTableText' => 'system/modules/metamodelsattribute_translatedtabletext/TableMetaModelsAttributeTranslatedTableText.php',
-));
-
-
-/**
  * Register the templates
  */
 TemplateLoader::addFiles(array

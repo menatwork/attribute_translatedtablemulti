@@ -16,7 +16,8 @@
  * @filesource
  */
 
-$GLOBALS['METAMODELS']['attributes']['translatedtabletext']['class'] = 'MetaModelAttributeTranslatedTableText';
+$GLOBALS['METAMODELS']['attributes']['translatedtabletext']['class'] =
+	'MetaModels\Attribute\TranslatedTableText\TranslatedTableText';
 $GLOBALS['METAMODELS']['attributes']['translatedtabletext']['image'] =
 	'system/modules/metamodelsattribute_translatedtabletext/html/translatedtabletext.png';
 
