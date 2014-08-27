@@ -55,7 +55,7 @@ class TranslatedTableTextCols
 				DecodePropertyValueForWidgetEvent::NAME  => __CLASS__ . '::loadValues',
 				EncodePropertyValueFromWidgetEvent::NAME => __CLASS__ . '::saveValues'
 			),
-			$event->getDispatcher(),
+			func_get_arg(2),
 			array(
 				'tl_metamodel_attribute',
 				'translatedtabletext_cols'
