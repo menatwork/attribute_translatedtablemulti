@@ -203,7 +203,7 @@ class TranslatedTableTextCols
 
 				if (is_array($varSubValue))
 				{
-					$arrOutput[] = array('langcode' => $strLangCode, 'rowLables' => $varSubValue);
+					$arrOutput[] = array('langcode' => $strLangCode, 'rowLabels' => $varSubValue);
 				}
 				else
 				{
