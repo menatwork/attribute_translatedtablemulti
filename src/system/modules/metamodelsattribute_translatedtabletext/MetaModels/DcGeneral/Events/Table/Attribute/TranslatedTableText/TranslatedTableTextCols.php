@@ -134,12 +134,6 @@ class TranslatedTableTextCols
 		);
 		$data['columnFields']['rowLabels']['eval']['minCount']                          = $intCols;
 		$data['columnFields']['rowLabels']['eval']['maxCount']                          = $intCols;
-		$data['columnFields']['rowLabels']['label']                                     = $translator->translate(
-			'tabletext_rowLabels',
-			'tl_metamodel_attribute'
-		);
-		$data['columnFields']['rowLabels']['eval']['minCount']                          = $intCols;
-		$data['columnFields']['rowLabels']['eval']['maxCount']                          = $intCols;
 		$data['columnFields']['rowLabels']['eval']['columnFields']['rowLabel']['label'] = $translator->translate(
 			'tabletext_rowLabel',
 			'tl_metamodel_attribute'
