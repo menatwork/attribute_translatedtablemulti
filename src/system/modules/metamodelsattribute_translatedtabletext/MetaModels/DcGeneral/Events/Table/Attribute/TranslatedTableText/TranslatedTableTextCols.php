@@ -73,9 +73,13 @@ class TranslatedTableTextCols
 	public static function fillExtraData(BuildWidgetEvent $event)
 	{
 		$model        = $event->getModel();
-		$intCols      = $model->getProperty('tabletext_quantity_cols');
 		$objMetaModel = AttributeBase::getMetaModelFromModel($event->getModel());
 		$translator   = $event->getEnvironment()->getTranslator();
+
+		// Check model and input for the cols and get the max value.
+		$intModelCols = $model->getProperty('tabletext_quantity_cols');
+		$intInputCols = $event->getEnvironment()->getInputProvider()->getValue('tabletext_quantity_cols');
+		$intCols      = max(intval($intModelCols), intval($intInputCols));
 
 		// For new models, we might not have a value.
 		if (!$intCols)
@@ -156,9 +160,13 @@ class TranslatedTableTextCols
 	 */
 	public static function loadValues(DecodePropertyValueForWidgetEvent $event)
 	{
-		$intCols      = $event->getModel()->getProperty('tabletext_quantity_cols');
 		$objMetaModel = AttributeBase::getMetaModelFromModel($event->getModel());
 		$arrLanguages = $objMetaModel->getAvailableLanguages();
+
+		// Check model and input for the cols and get the max value.
+		$intModelCols = $event->getModel()->getProperty('tabletext_quantity_cols');
+		$intInputCols = $event->getEnvironment()->getInputProvider()->getValue('tabletext_quantity_cols');
+		$intCols      = max(intval($intModelCols), intval($intInputCols));
 
 		$varValue = $event->getValue();
 
