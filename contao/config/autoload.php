@@ -19,7 +19,6 @@
 /**
  * Register the templates
  */
-TemplateLoader::addFiles(array
-(
-	'mm_attr_translatedtabletext' => 'system/modules/metamodelsattribute_translatedtabletext/templates',
+TemplateLoader::addFiles(array(
+    'mm_attr_translatedtabletext' => 'system/modules/metamodelsattribute_translatedtabletext/templates',
 ));

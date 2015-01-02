@@ -32,329 +32,304 @@ use MetaModels\Attribute\IComplex;
  */
 class TranslatedTableText extends Base implements ITranslated, IComplex
 {
+    /**
+     * {@inheritDoc}
+     */
+    public function getAttributeSettingNames()
+    {
+        return array_merge(parent::getAttributeSettingNames(), array(
+            'translatedtabletext_cols',
+        ));
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getAttributeSettingNames()
-	{
-		return array_merge(parent::getAttributeSettingNames(), array(
-			'translatedtabletext_cols'
-		));
-	}
+    /**
+     * Retrieve the table name containing the values.
+     *
+     * @return string
+     */
+    protected function getValueTable()
+    {
+        return 'tl_metamodel_translatedtabletext';
+    }
 
-	/**
-	 * Retrieve the table name containing the values.
-	 *
-	 * @return string
-	 */
-	protected function getValueTable()
-	{
-		return 'tl_metamodel_translatedtabletext';
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public function getFieldDefinition($arrOverrides = array())
+    {
+        $strActiveLanguage   = $this->getMetaModel()->getActiveLanguage();
+        $strFallbackLanguage = $this->getMetaModel()->getFallbackLanguage();
+        $arrAllColLabels     = deserialize($this->get('translatedtabletext_cols'), true);
+        $arrColLabels        = null;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getFieldDefinition($arrOverrides = array())
-	{
-		$strActiveLanguage   = $this->getMetaModel()->getActiveLanguage();
-		$strFallbackLanguage = $this->getMetaModel()->getFallbackLanguage();
-		$arrAllColLabels     = deserialize($this->get('translatedtabletext_cols'), true);
-		$arrColLabels        = null;
+        if (array_key_exists($strActiveLanguage, $arrAllColLabels)) {
+            $arrColLabels = $arrAllColLabels[$strActiveLanguage];
+        } elseif (array_key_exists($strActiveLanguage, $strFallbackLanguage)) {
+            $arrColLabels = $arrAllColLabels[$strFallbackLanguage];
+        } else {
+            $arrColLabels = array_pop(array_reverse($arrAllColLabels));
+        }
 
-		if (array_key_exists($strActiveLanguage, $arrAllColLabels))
-		{
-			$arrColLabels = $arrAllColLabels[$strActiveLanguage];
-		}
-		elseif (array_key_exists($strActiveLanguage, $strFallbackLanguage))
-		{
-			$arrColLabels = $arrAllColLabels[$strFallbackLanguage];
-		}
-		else
-		{
-			$arrColLabels = array_pop(array_reverse($arrAllColLabels));
-		}
+        // Build DCA.
+        $arrFieldDef                         = parent::getFieldDefinition($arrOverrides);
+        $arrFieldDef['inputType']            = 'multiColumnWizard';
+        $arrFieldDef['eval']['columnFields'] = array();
 
-		// Build DCA.
-		$arrFieldDef                         = parent::getFieldDefinition($arrOverrides);
-		$arrFieldDef['inputType']            = 'multiColumnWizard';
-		$arrFieldDef['eval']['columnFields'] = array();
+        $count = count($arrColLabels);
+        for ($i = 0; $i < $count; $i++) {
+            $arrFieldDef['eval']['columnFields']['col_'.$i] = array(
+                'label' => $arrColLabels[$i]['rowLabel'],
+                'inputType' => 'text',
+                'eval' => array(),
+            );
 
-		$count = count($arrColLabels);
-		for ($i = 0; $i < $count; $i++)
-		{
-			$arrFieldDef['eval']['columnFields']['col_'.$i] = array(
-				'label' => $arrColLabels[$i]['rowLabel'],
-				'inputType' => 'text',
-				'eval' => array(),
-			);
+            if ($arrColLabels[$i]['rowStyle']) {
+                $arrFieldDef['eval']['columnFields']['col_'.$i]['eval']['style'] = 'width:'.$arrColLabels[$i]['rowStyle'];
+            }
+        }
 
-			if ($arrColLabels[$i]['rowStyle'])
-			{
-				$arrFieldDef['eval']['columnFields']['col_'.$i]['eval']['style'] = 'width:' . $arrColLabels[$i]['rowStyle'];
-			}
-		}
+        return $arrFieldDef;
+    }
 
-		return $arrFieldDef;
-	}
+    /**
+     * Build a where clause for the given id(s) and rows/cols.
+     *
+     * @param mixed $mixIds One, none or many ids to use.
+     *
+     * @param string $strLangCode The language code.
+     *
+     * @param int $intRow The row number, optional.
+     *
+     * @param int $intCol The col number, optional.
+     *
+     * @return string
+     */
+    protected function getWhere($mixIds, $strLangCode, $intRow = null, $intCol = null)
+    {
+        $strWhereIds = '';
+        $strRowCol   = '';
+        if ($mixIds) {
+            if (is_array($mixIds)) {
+                $strWhereIds = ' AND item_id IN ('.implode(',', $mixIds).')';
+            } else {
+                $strWhereIds = ' AND item_id='.$mixIds;
+            }
+        }
 
-	/**
-	 * Build a where clause for the given id(s) and rows/cols.
-	 *
-	 * @param mixed  $mixIds      One, none or many ids to use.
-	 *
-	 * @param string $strLangCode The language code.
-	 *
-	 * @param int    $intRow      The row number, optional.
-	 *
-	 * @param int    $intCol      The col number, optional.
-	 *
-	 * @return string
-	 */
-	protected function getWhere($mixIds, $strLangCode, $intRow = null, $intCol = null)
-	{
-		$strWhereIds = '';
-		$strRowCol   = '';
-		if ($mixIds)
-		{
-			if (is_array($mixIds))
-			{
-				$strWhereIds = ' AND item_id IN (' . implode(',', $mixIds) . ')';
-			}
-			else
-			{
-				$strWhereIds = ' AND item_id=' . $mixIds;
-			}
-		}
+        if (is_int($intRow) && is_int($intCol)) {
+            $strRowCol = ' AND row = ? AND col = ?';
+        }
 
-		if (is_int($intRow) && is_int($intCol))
-		{
-			$strRowCol = ' AND row = ? AND col = ?';
-		}
+        $arrReturn = array(
+            'procedure' => 'att_id=?'.$strWhereIds.$strRowCol,
+            'params' => ($strRowCol) ? array(intval($this->get('id')), $intRow, $intCol) : array(intval($this->get('id'))),
+        );
 
-		$arrReturn = array(
-			'procedure' => 'att_id=?' . $strWhereIds . $strRowCol,
-			'params' => ($strRowCol) ? array(intval($this->get('id')), $intRow, $intCol) : array(intval($this->get('id')))
-		);
+        if ($strLangCode) {
+            $arrReturn['procedure'] .= ' AND langcode=?';
+            $arrReturn['params'][]   = $strLangCode;
+        }
 
-		if ($strLangCode)
-		{
-			$arrReturn['procedure'] .= ' AND langcode=?';
-			$arrReturn['params'][]   = $strLangCode;
-		}
+        return $arrReturn;
+    }
 
-		return $arrReturn;
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function valueToWidget($varValue)
+    {
+        if (!is_array($varValue)) {
+            return array();
+        }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function valueToWidget($varValue)
-	{
-		if (!is_array($varValue))
-		{
-			return array();
-		}
+        $widgetValue = array();
+        foreach ($varValue as $row) {
+            foreach ($row as $key => $col) {
+                $widgetValue[$col['row']]['col_'.$key] = $col['value'];
+            }
+        }
 
-		$widgetValue = array();
-		foreach ($varValue as $row)
-		{
-			foreach ($row as $key => $col)
-			{
-				$widgetValue[$col['row']]['col_'.$key] = $col['value'];
-			}
-		}
-		return $widgetValue;
-	}
+        return $widgetValue;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function widgetToValue($varValue, $intId)
-	{
-		if (!is_array($varValue))
-		{
-			return null;
-		}
+    /**
+     * {@inheritdoc}
+     */
+    public function widgetToValue($varValue, $intId)
+    {
+        if (!is_array($varValue)) {
+            return null;
+        }
 
-		$newValue = array();
-		foreach ($varValue as $k => $row)
-		{
-			foreach ($row as $kk => $col)
-			{
-				$kk = str_replace('col_', '', $kk);
+        $newValue = array();
+        foreach ($varValue as $k => $row) {
+            foreach ($row as $kk => $col) {
+                $kk = str_replace('col_', '', $kk);
 
-				$newValue[$k][$kk]['value'] = $col;
-				$newValue[$k][$kk]['col']   = $kk;
-				$newValue[$k][$kk]['row']   = $k;
-			}
-		}
-		return $newValue;
-	}
+                $newValue[$k][$kk]['value'] = $col;
+                $newValue[$k][$kk]['col']   = $kk;
+                $newValue[$k][$kk]['row']   = $k;
+            }
+        }
 
-	/**
-	 * Retrieve the setter array.
-	 *
-	 * @param array  $arrCell     The cells of the table.
-	 *
-	 * @param int    $intId       The id of the item.
-	 *
-	 * @param string $strLangCode The language code.
-	 *
-	 * @return array
-	 */
-	protected function getSetValues($arrCell, $intId, $strLangCode)
-	{
-		return array
-			(
-			'tstamp'   => time(),
-			'value'    => (string)$arrCell['value'],
-			'att_id'   => $this->get('id'),
-			'row'      => (int)$arrCell['row'],
-			'col'      => (int)$arrCell['col'],
-			'item_id'  => $intId,
-			'langcode' => $strLangCode,
-		);
-	}
+        return $newValue;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getTranslatedDataFor($arrIds, $strLangCode)
-	{
-		$objDB = \Database::getInstance();
+    /**
+     * Retrieve the setter array.
+     *
+     * @param array $arrCell The cells of the table.
+     *
+     * @param int $intId The id of the item.
+     *
+     * @param string $strLangCode The language code.
+     *
+     * @return array
+     */
+    protected function getSetValues($arrCell, $intId, $strLangCode)
+    {
+        return array(
+            'tstamp'   => time(),
+            'value'    => (string) $arrCell['value'],
+            'att_id'   => $this->get('id'),
+            'row'      => (int) $arrCell['row'],
+            'col'      => (int) $arrCell['col'],
+            'item_id'  => $intId,
+            'langcode' => $strLangCode,
+        );
+    }
 
-		$arrWhere = $this->getWhere($arrIds, $strLangCode);
-		$strQuery = sprintf(
-			'SELECT * FROM %s %s ORDER BY row ASC, col ASC',
-			$this->getValueTable(),
-			($arrWhere ? ' WHERE ' . $arrWhere['procedure'] : '')
-		);
-		$objValue = $objDB->prepare($strQuery)
-			->executeUncached(($arrWhere ? $arrWhere['params'] : null));
+    /**
+     * {@inheritDoc}
+     */
+    public function getTranslatedDataFor($arrIds, $strLangCode)
+    {
+        $objDB = \Database::getInstance();
 
-		$arrReturn = array();
-		while ($objValue->next())
-		{
-			$arrReturn[$objValue->item_id][$objValue->row][] = $objValue->row();
-		}
+        $arrWhere = $this->getWhere($arrIds, $strLangCode);
+        $strQuery = sprintf(
+            'SELECT * FROM %s %s ORDER BY row ASC, col ASC',
+            $this->getValueTable(),
+            ($arrWhere ? ' WHERE '.$arrWhere['procedure'] : '')
+        );
+        $objValue = $objDB->prepare($strQuery)
+            ->executeUncached(($arrWhere ? $arrWhere['params'] : null));
 
-		return $arrReturn;
-	}
+        $arrReturn = array();
+        while ($objValue->next()) {
+            $arrReturn[$objValue->item_id][$objValue->row][] = $objValue->row();
+        }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function searchForInLanguages($strPattern, $arrLanguages = array())
-	{
-		return array();
-	}
+        return $arrReturn;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function setTranslatedDataFor($arrValues, $strLangCode)
-	{
-		$objDB = \Database::getInstance();
+    /**
+     * {@inheritDoc}
+     */
+    public function searchForInLanguages($strPattern, $arrLanguages = array())
+    {
+        return array();
+    }
 
-		// Get the ids.
-		$arrIds         = array_keys($arrValues);
-		$strQueryUpdate = 'UPDATE %s';
+    /**
+     * {@inheritDoc}
+     */
+    public function setTranslatedDataFor($arrValues, $strLangCode)
+    {
+        $objDB = \Database::getInstance();
 
-		// Insert or Update the cells.
-		$strQuery = 'INSERT INTO ' . $this->getValueTable() . ' %s';
-		foreach ($arrIds as $intId)
-		{
-			// No values give, delete all values.
-			if (empty($arrValues[$intId]))
-			{
-				$strDelQuery = 'DELETE FROM ' . $this->getValueTable() . ' WHERE att_id=? AND item_id=? AND langcode=?';
+        // Get the ids.
+        $arrIds         = array_keys($arrValues);
+        $strQueryUpdate = 'UPDATE %s';
 
-				$objDB->prepare($strDelQuery)
-						->execute(intval($this->get('id')), $intId, $strLangCode);
+        // Insert or Update the cells.
+        $strQuery = 'INSERT INTO '.$this->getValueTable().' %s';
+        foreach ($arrIds as $intId) {
+            // No values give, delete all values.
+            if (empty($arrValues[$intId])) {
+                $strDelQuery = 'DELETE FROM '.$this->getValueTable().' WHERE att_id=? AND item_id=? AND langcode=?';
 
-				continue;
-			}
+                $objDB->prepare($strDelQuery)
+                        ->execute(intval($this->get('id')), $intId, $strLangCode);
 
-			// Delete missing rows.
-			$rowIds      = array_keys($arrValues[$intId]);
-			$strDelQuery = sprintf(
-				'DELETE FROM %s WHERE att_id=? AND item_id=? AND langcode=? AND row NOT IN (%s)',
-				$this->getValueTable(),
-				implode(',', $rowIds)
-			);
+                continue;
+            }
 
-			$objDB->prepare($strDelQuery)
-					->execute(intval($this->get('id')), $intId, $strLangCode);
+            // Delete missing rows.
+            $rowIds      = array_keys($arrValues[$intId]);
+            $strDelQuery = sprintf(
+                'DELETE FROM %s WHERE att_id=? AND item_id=? AND langcode=? AND row NOT IN (%s)',
+                $this->getValueTable(),
+                implode(',', $rowIds)
+            );
 
-			// Walk every row.
-			foreach ($arrValues[$intId] as $row)
-			{
-				// Walk every column and update/insert the value.
-				foreach ($row as $col)
-				{
-					$values   = $this->getSetValues($col, $intId, $strLangCode);
-					$subQuery = $objDB
-						->prepare($strQueryUpdate)
-						->set($values)
-						->query;
+            $objDB->prepare($strDelQuery)
+                    ->execute(intval($this->get('id')), $intId, $strLangCode);
 
-					$objDB
-						->prepare($strQuery . ' ON DUPLICATE KEY ' . str_replace('SET ', '', $subQuery))
-						->set($values)
-						->execute();
-				}
-			}
-		}
-	}
+            // Walk every row.
+            foreach ($arrValues[$intId] as $row) {
+                // Walk every column and update/insert the value.
+                foreach ($row as $col) {
+                    $values   = $this->getSetValues($col, $intId, $strLangCode);
+                    $subQuery = $objDB
+                        ->prepare($strQueryUpdate)
+                        ->set($values)
+                        ->query;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function unsetValueFor($arrIds, $strLangCode)
-	{
-		$objDB = \Database::getInstance();
+                    $objDB
+                        ->prepare($strQuery.' ON DUPLICATE KEY '.str_replace('SET ', '', $subQuery))
+                        ->set($values)
+                        ->execute();
+                }
+            }
+        }
+    }
 
-		$arrWhere = $this->getWhere($arrIds, $strLangCode);
-		$strQuery = 'DELETE FROM ' . $this->getValueTable() . ($arrWhere ? ' WHERE ' . $arrWhere['procedure'] : '');
+    /**
+     * {@inheritDoc}
+     */
+    public function unsetValueFor($arrIds, $strLangCode)
+    {
+        $objDB = \Database::getInstance();
 
-		$objDB->prepare($strQuery)
-				->execute(($arrWhere ? $arrWhere['params'] : null));
-	}
+        $arrWhere = $this->getWhere($arrIds, $strLangCode);
+        $strQuery = 'DELETE FROM '.$this->getValueTable().($arrWhere ? ' WHERE '.$arrWhere['procedure'] : '');
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getFilterOptions($arrIds, $usedOnly, &$arrCount = null)
-	{
-		return array();
-	}
+        $objDB->prepare($strQuery)
+                ->execute(($arrWhere ? $arrWhere['params'] : null));
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function setDataFor($arrValues)
-	{
-		return array();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public function getFilterOptions($arrIds, $usedOnly, &$arrCount = null)
+    {
+        return array();
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getDataFor($arrIds)
-	{
-		// TODO: implement.
-		return array();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public function setDataFor($arrValues)
+    {
+        return array();
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function unsetDataFor($arrIds)
-	{
-		// TODO: implement.
-		return array();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public function getDataFor($arrIds)
+    {
+        // TODO: implement.
+        return array();
+    }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function unsetDataFor($arrIds)
+    {
+        // TODO: implement.
+        return array();
+    }
 }

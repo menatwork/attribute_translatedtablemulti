@@ -11,5 +11,4 @@
  * last-updated: 2013-07-01T00:11:52+02:00
  */
 
-
 $GLOBALS['TL_LANG']['tl_metamodel_attribute']['tabletext_rowLabel']['0'] = 'Ετικετα';
