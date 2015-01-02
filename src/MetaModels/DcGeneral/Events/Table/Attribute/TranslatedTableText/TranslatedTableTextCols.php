@@ -10,6 +10,9 @@
  * @package     MetaModels
  * @subpackage  AttributeTranslatedTableText
  * @author      Stefan Heimes <stefan_heimes@hotmail.com>
+ * @author      Christian Schiffler <c.schiffler@cyberspectrum.de>
+ * @author      Andreas Nölke <zero@brothers-project.de>
+ * @author      David Greminger <david.greminger@1up.io>
  * @copyright   The MetaModels team.
  * @license     LGPL.
  * @filesource
@@ -68,6 +71,9 @@ class TranslatedTableTextCols
      * @param BuildWidgetEvent $event The event.
      *
      * @return void
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.NPathComplexity)
      */
     public static function fillExtraData(BuildWidgetEvent $event)
     {
@@ -113,28 +119,33 @@ class TranslatedTableTextCols
 
         $arrRowClasses = array();
         foreach (array_keys(deserialize($arrValues)) as $strLangcode) {
-            $arrRowClasses[] = ($strLangcode == $objMetaModel->getFallbackLanguage()) ? 'fallback_language' : 'normal_language';
+            $arrRowClasses[] = ($strLangcode == $objMetaModel->getFallbackLanguage())
+                ? 'fallback_language'
+                : 'normal_language';
         }
 
-        $data                                                                           = $event->getProperty()->getExtra();
-        $data['minCount']                                                               = count($arrLanguages);
-        $data['maxCount']                                                               = count($arrLanguages);
-        $data['columnFields']['langcode']['label']                                      = $translator->translate(
+        $data                                      = $event->getProperty()->getExtra();
+        $data['minCount']                          = count($arrLanguages);
+        $data['maxCount']                          = count($arrLanguages);
+        $data['columnFields']['langcode']['label'] = $translator->translate(
             'name_langcode',
             'tl_metamodel_attribute'
         );
-        $data['columnFields']['langcode']['options']                                    = $arrLanguages;
-        $data['columnFields']['langcode']['eval']['rowClasses']                         = $arrRowClasses;
-        $data['columnFields']['rowLabels']['label']                                     = $translator->translate(
+
+        $data['columnFields']['langcode']['options']            = $arrLanguages;
+        $data['columnFields']['langcode']['eval']['rowClasses'] = $arrRowClasses;
+        $data['columnFields']['rowLabels']['label']             = $translator->translate(
             'tabletext_rowLabels',
             'tl_metamodel_attribute'
         );
+
         $data['columnFields']['rowLabels']['eval']['minCount']                          = $intCols;
         $data['columnFields']['rowLabels']['eval']['maxCount']                          = $intCols;
         $data['columnFields']['rowLabels']['eval']['columnFields']['rowLabel']['label'] = $translator->translate(
             'tabletext_rowLabel',
             'tl_metamodel_attribute'
         );
+
         $data['columnFields']['rowLabels']['eval']['columnFields']['rowLabel']['eval']  = $arrRowClasses;
         $data['columnFields']['rowLabels']['eval']['columnFields']['rowStyle']['label'] = $translator->translate(
             'tabletext_rowStyle',

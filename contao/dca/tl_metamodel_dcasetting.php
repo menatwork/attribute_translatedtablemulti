@@ -9,8 +9,8 @@
  * PHP version 5
  * @package     MetaModels
  * @subpackage  AttributeTranslatedTableText
- * @author      David Maack <david.maack@arcor.de>
- * @author      Stefan Heimes <stefan_heimes@hotmail.com>
+ * @author      Andreas Isaak <andy.jared@googlemail.com>
+ * @author      David Greminger <david.greminger@1up.io>
  * @copyright   The MetaModels team.
  * @license     LGPL.
  * @filesource

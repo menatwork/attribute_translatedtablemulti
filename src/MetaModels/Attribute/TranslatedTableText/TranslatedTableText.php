@@ -11,6 +11,9 @@
  * @subpackage  AttributeTranslatedTableText
  * @author      David Maack <david.maack@arcor.de>
  * @author      Stefan Heimes <stefan_heimes@hotmail.com>
+ * @author      Christian Schiffler <c.schiffler@cyberspectrum.de>
+ * @author      Andreas Isaak <andy.jared@googlemail.com>
+ * @author      David Greminger <david.greminger@1up.io>
  * @copyright   The MetaModels team.
  * @license     LGPL.
  * @filesource
@@ -84,7 +87,8 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
             );
 
             if ($arrColLabels[$i]['rowStyle']) {
-                $arrFieldDef['eval']['columnFields']['col_'.$i]['eval']['style'] = 'width:'.$arrColLabels[$i]['rowStyle'];
+                $arrFieldDef['eval']['columnFields']['col_'.$i]['eval']['style'] =
+                    'width:'.$arrColLabels[$i]['rowStyle'];
             }
         }
 
@@ -94,13 +98,10 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
     /**
      * Build a where clause for the given id(s) and rows/cols.
      *
-     * @param mixed $mixIds One, none or many ids to use.
-     *
+     * @param mixed  $mixIds      One, none or many ids to use.
      * @param string $strLangCode The language code.
-     *
-     * @param int $intRow The row number, optional.
-     *
-     * @param int $intCol The col number, optional.
+     * @param int    $intRow      The row number, optional.
+     * @param int    $intCol      The col number, optional.
      *
      * @return string
      */
@@ -122,7 +123,9 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
 
         $arrReturn = array(
             'procedure' => 'att_id=?'.$strWhereIds.$strRowCol,
-            'params' => ($strRowCol) ? array(intval($this->get('id')), $intRow, $intCol) : array(intval($this->get('id'))),
+            'params' => ($strRowCol)
+                ? array(intval($this->get('id')), $intRow, $intCol)
+                : array(intval($this->get('id'))),
         );
 
         if ($strLangCode) {
@@ -178,10 +181,8 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
     /**
      * Retrieve the setter array.
      *
-     * @param array $arrCell The cells of the table.
-     *
-     * @param int $intId The id of the item.
-     *
+     * @param array  $arrCell     The cells of the table.
+     * @param int    $intId       The id of the item.
      * @param string $strLangCode The language code.
      *
      * @return array
@@ -225,6 +226,7 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
 
     /**
      * {@inheritDoc}
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function searchForInLanguages($strPattern, $arrLanguages = array())
     {
@@ -301,6 +303,7 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
 
     /**
      * {@inheritDoc}
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function getFilterOptions($arrIds, $usedOnly, &$arrCount = null)
     {
@@ -309,6 +312,7 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
 
     /**
      * {@inheritDoc}
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function setDataFor($arrValues)
     {
@@ -317,19 +321,19 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
 
     /**
      * {@inheritDoc}
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function getDataFor($arrIds)
     {
-        // TODO: implement.
         return array();
     }
 
     /**
      * {@inheritDoc}
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function unsetDataFor($arrIds)
     {
-        // TODO: implement.
         return array();
     }
 }
