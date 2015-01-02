@@ -4,6 +4,6 @@ This project is using the Contao Community Alliance Build System (CCABS)
 For documentation visit:
 https://github.com/contao-community-alliance/build-system
 -->
-<project name="MetaModels attribute translatedfile" default="build">
+<project name="MetaModels attribute translatedtabletext" default="build">
     <import file="vendor/contao-community-alliance/build-system/ccabs.main.xml"/>
 </project>
