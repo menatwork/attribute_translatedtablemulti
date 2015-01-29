@@ -210,16 +210,18 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
      */
     public function getTranslatedDataFor($arrIds, $strLangCode)
     {
-        $objDB = \Database::getInstance();
-
         $arrWhere = $this->getWhere($arrIds, $strLangCode);
         $strQuery = sprintf(
             'SELECT * FROM %s %s ORDER BY row ASC, col ASC',
             $this->getValueTable(),
             ($arrWhere ? ' WHERE ' . $arrWhere['procedure'] : '')
         );
-        $objValue = $objDB->prepare($strQuery)
-            ->executeUncached(($arrWhere ? $arrWhere['params'] : null));
+        $objValue = $this
+            ->getMetaModel()
+            ->getServiceContainer()
+            ->getDatabase()
+            ->prepare($strQuery)
+            ->execute(($arrWhere ? $arrWhere['params'] : null));
 
         $arrReturn = array();
         while ($objValue->next()) {
@@ -243,7 +245,7 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
      */
     public function setTranslatedDataFor($arrValues, $strLangCode)
     {
-        $objDB = \Database::getInstance();
+        $objDB = $this->getMetaModel()->getServiceContainer()->getDatabase();
 
         // Get the ids.
         $arrIds         = array_keys($arrValues);
@@ -256,8 +258,9 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
             if (empty($arrValues[$intId])) {
                 $strDelQuery = 'DELETE FROM ' . $this->getValueTable() . ' WHERE att_id=? AND item_id=? AND langcode=?';
 
-                $objDB->prepare($strDelQuery)
-                        ->execute(intval($this->get('id')), $intId, $strLangCode);
+                $objDB
+                    ->prepare($strDelQuery)
+                    ->execute(intval($this->get('id')), $intId, $strLangCode);
 
                 continue;
             }
@@ -270,8 +273,9 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
                 implode(',', $rowIds)
             );
 
-            $objDB->prepare($strDelQuery)
-                    ->execute(intval($this->get('id')), $intId, $strLangCode);
+            $objDB
+                ->prepare($strDelQuery)
+                ->execute(intval($this->get('id')), $intId, $strLangCode);
 
             // Walk every row.
             foreach ($arrValues[$intId] as $row) {
@@ -297,13 +301,13 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
      */
     public function unsetValueFor($arrIds, $strLangCode)
     {
-        $objDB = \Database::getInstance();
-
+        $objDB    = $this->getMetaModel()->getServiceContainer()->getDatabase();
         $arrWhere = $this->getWhere($arrIds, $strLangCode);
         $strQuery = 'DELETE FROM ' . $this->getValueTable() . ($arrWhere ? ' WHERE ' . $arrWhere['procedure'] : '');
 
-        $objDB->prepare($strQuery)
-                ->execute(($arrWhere ? $arrWhere['params'] : null));
+        $objDB
+            ->prepare($strQuery)
+            ->execute(($arrWhere ? $arrWhere['params'] : null));
     }
 
     /**
