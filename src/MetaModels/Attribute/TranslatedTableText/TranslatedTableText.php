@@ -28,7 +28,7 @@ use MetaModels\Attribute\IComplex;
 /**
  * This is the MetaModelAttribute class for handling translated table text fields.
  *
- * @package	   MetaModels
+ * @package    MetaModels
  * @subpackage AttributeTranslatedTableText
  * @author     David Maack <david.maack@arcor.de>
  * @author     Stefan Heimes <stefan_heimes@hotmail.com>
@@ -99,8 +99,11 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
      * Build a where clause for the given id(s) and rows/cols.
      *
      * @param mixed  $mixIds      One, none or many ids to use.
+     *
      * @param string $strLangCode The language code.
+     *
      * @param int    $intRow      The row number, optional.
+     *
      * @param int    $intCol      The col number, optional.
      *
      * @return string
@@ -182,7 +185,9 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
      * Retrieve the setter array.
      *
      * @param array  $arrCell     The cells of the table.
+     *
      * @param int    $intId       The id of the item.
+     *
      * @param string $strLangCode The language code.
      *
      * @return array
