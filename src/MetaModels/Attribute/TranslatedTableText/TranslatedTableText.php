@@ -80,15 +80,15 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
 
         $count = count($arrColLabels);
         for ($i = 0; $i < $count; $i++) {
-            $arrFieldDef['eval']['columnFields']['col_'.$i] = array(
+            $arrFieldDef['eval']['columnFields']['col_' . $i] = array(
                 'label' => $arrColLabels[$i]['rowLabel'],
                 'inputType' => 'text',
                 'eval' => array(),
             );
 
             if ($arrColLabels[$i]['rowStyle']) {
-                $arrFieldDef['eval']['columnFields']['col_'.$i]['eval']['style'] =
-                    'width:'.$arrColLabels[$i]['rowStyle'];
+                $arrFieldDef['eval']['columnFields']['col_' . $i]['eval']['style'] =
+                    'width:' . $arrColLabels[$i]['rowStyle'];
             }
         }
 
@@ -151,7 +151,7 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
         $widgetValue = array();
         foreach ($varValue as $row) {
             foreach ($row as $key => $col) {
-                $widgetValue[$col['row']]['col_'.$key] = $col['value'];
+                $widgetValue[$col['row']]['col_' . $key] = $col['value'];
             }
         }
 
@@ -161,7 +161,7 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
     /**
      * {@inheritdoc}
      */
-    public function widgetToValue($varValue, $intId)
+    public function widgetToValue($varValue, $itemId)
     {
         if (!is_array($varValue)) {
             return null;
@@ -216,7 +216,7 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
         $strQuery = sprintf(
             'SELECT * FROM %s %s ORDER BY row ASC, col ASC',
             $this->getValueTable(),
-            ($arrWhere ? ' WHERE '.$arrWhere['procedure'] : '')
+            ($arrWhere ? ' WHERE ' . $arrWhere['procedure'] : '')
         );
         $objValue = $objDB->prepare($strQuery)
             ->executeUncached(($arrWhere ? $arrWhere['params'] : null));
@@ -250,11 +250,11 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
         $strQueryUpdate = 'UPDATE %s';
 
         // Insert or Update the cells.
-        $strQuery = 'INSERT INTO '.$this->getValueTable().' %s';
+        $strQuery = 'INSERT INTO ' . $this->getValueTable() . ' %s';
         foreach ($arrIds as $intId) {
             // No values give, delete all values.
             if (empty($arrValues[$intId])) {
-                $strDelQuery = 'DELETE FROM '.$this->getValueTable().' WHERE att_id=? AND item_id=? AND langcode=?';
+                $strDelQuery = 'DELETE FROM ' . $this->getValueTable() . ' WHERE att_id=? AND item_id=? AND langcode=?';
 
                 $objDB->prepare($strDelQuery)
                         ->execute(intval($this->get('id')), $intId, $strLangCode);
@@ -284,7 +284,7 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
                         ->query;
 
                     $objDB
-                        ->prepare($strQuery.' ON DUPLICATE KEY '.str_replace('SET ', '', $subQuery))
+                        ->prepare($strQuery . ' ON DUPLICATE KEY ' . str_replace('SET ', '', $subQuery))
                         ->set($values)
                         ->execute();
                 }
@@ -300,7 +300,7 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
         $objDB = \Database::getInstance();
 
         $arrWhere = $this->getWhere($arrIds, $strLangCode);
-        $strQuery = 'DELETE FROM '.$this->getValueTable().($arrWhere ? ' WHERE '.$arrWhere['procedure'] : '');
+        $strQuery = 'DELETE FROM ' . $this->getValueTable() . ($arrWhere ? ' WHERE ' . $arrWhere['procedure'] : '');
 
         $objDB->prepare($strQuery)
                 ->execute(($arrWhere ? $arrWhere['params'] : null));
@@ -310,7 +310,7 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
      * {@inheritDoc}
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function getFilterOptions($arrIds, $usedOnly, &$arrCount = null)
+    public function getFilterOptions($idList, $usedOnly, &$arrCount = null)
     {
         return array();
     }
