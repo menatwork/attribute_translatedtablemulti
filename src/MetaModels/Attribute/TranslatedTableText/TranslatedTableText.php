@@ -325,6 +325,7 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
      */
     public function setDataFor($arrValues)
     {
+        // TODO: implement.
         return array();
     }
 
@@ -334,6 +335,7 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
      */
     public function getDataFor($arrIds)
     {
+        // TODO: implement.
         return array();
     }
 
@@ -343,6 +345,7 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
      */
     public function unsetDataFor($arrIds)
     {
+        // TODO: implement.
         return array();
     }
 }
