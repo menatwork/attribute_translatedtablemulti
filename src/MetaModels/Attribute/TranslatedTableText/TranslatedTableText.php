@@ -110,26 +110,26 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
      */
     protected function getWhere($mixIds, $strLangCode, $intRow = null, $intCol = null)
     {
-        $strWhereIds = '';
-        $strRowCol   = '';
+        $arrReturn = array(
+            'procedure' => 'att_id=?',
+            'params' => array(intval($this->get('id'))),
+        );
+
         if ($mixIds) {
             if (is_array($mixIds)) {
-                $strWhereIds = ' AND item_id IN ('.implode(',', $mixIds).')';
+                $arrReturn['procedure'] .= ' AND item_id IN (' . $this->parameterMask($mixIds) . ')';
+                $arrReturn['params']     = array_merge($arrReturn['params'], $mixIds);
             } else {
-                $strWhereIds = ' AND item_id='.$mixIds;
+                $arrReturn['procedure'] .= ' AND item_id=?';
+                $arrReturn['params'][]   = $mixIds;
             }
         }
 
         if (is_int($intRow) && is_int($intCol)) {
-            $strRowCol = ' AND row = ? AND col = ?';
+            $arrReturn['procedure'] .= ' AND row = ? AND col = ?';
+            $arrReturn['params'][]   = $intRow;
+            $arrReturn['params'][]   = $intCol;
         }
-
-        $arrReturn = array(
-            'procedure' => 'att_id=?'.$strWhereIds.$strRowCol,
-            'params' => ($strRowCol)
-                ? array(intval($this->get('id')), $intRow, $intCol)
-                : array(intval($this->get('id'))),
-        );
 
         if ($strLangCode) {
             $arrReturn['procedure'] .= ' AND langcode=?';
