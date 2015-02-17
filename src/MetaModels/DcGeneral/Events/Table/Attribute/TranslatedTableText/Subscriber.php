@@ -25,9 +25,7 @@ use ContaoCommunityAlliance\Contao\Bindings\Events\System\LoadLanguageFileEvent;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\BuildWidgetEvent;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\DecodePropertyValueForWidgetEvent;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\EncodePropertyValueFromWidgetEvent;
-use ContaoCommunityAlliance\DcGeneral\Factory\Event\BuildDataDefinitionEvent;
 use MetaModels\DcGeneral\Events\BaseSubscriber;
-use MetaModels\DcGeneral\Events\Table\Attribute\AttributeBase;
 
 /**
  * This is the helper class for handling translated table text fields.
@@ -36,33 +34,26 @@ use MetaModels\DcGeneral\Events\Table\Attribute\AttributeBase;
  * @subpackage AttributeTranslatedTableText
  * @author     Stefan Heimes <stefan_heimes@hotmail.com>
  */
-class TranslatedTableTextCols
+class Subscriber extends BaseSubscriber
 {
     /**
-     * Register various events related to tl_metamodel_attribute.
-     *
-     * @param BuildDataDefinitionEvent $event The event.
-     *
-     * @return void
+     * {@inheritdoc}
      */
-    public static function registerEvents(BuildDataDefinitionEvent $event)
+    protected function registerEventsInDispatcher()
     {
-        if ($event->getContainer()->getName() != 'tl_metamodel_attribute') {
-            return;
-        }
-
-        BaseSubscriber::registerListeners(
-            array(
-                BuildWidgetEvent::NAME                   => __CLASS__.'::fillExtraData',
-                DecodePropertyValueForWidgetEvent::NAME  => __CLASS__.'::loadValues',
-                EncodePropertyValueFromWidgetEvent::NAME => __CLASS__.'::saveValues',
-            ),
-            func_get_arg(2),
-            array(
-                'tl_metamodel_attribute',
-                'translatedtabletext_cols',
+        $this
+            ->addListener(
+                BuildWidgetEvent::NAME,
+                array($this, 'fillExtraData')
             )
-        );
+            ->addListener(
+                DecodePropertyValueForWidgetEvent::NAME,
+                array($this, 'loadValues')
+            )
+            ->addListener(
+                EncodePropertyValueFromWidgetEvent::NAME,
+                array($this, 'saveValues')
+            );
     }
 
     /**
@@ -75,10 +66,15 @@ class TranslatedTableTextCols
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      * @SuppressWarnings(PHPMD.NPathComplexity)
      */
-    public static function fillExtraData(BuildWidgetEvent $event)
+    public function fillExtraData(BuildWidgetEvent $event)
     {
+        if (($event->getEnvironment()->getDataDefinition()->getName() !== 'tl_metamodel_attribute')
+            || ($event->getProperty()->getName() !== 'translatedtabletext_cols')) {
+            return;
+        }
+
         $model        = $event->getModel();
-        $objMetaModel = AttributeBase::getMetaModelFromModel($event->getModel());
+        $objMetaModel = $this->getMetaModelById($event->getModel()->getProperty('pid'));
         $translator   = $event->getEnvironment()->getTranslator();
 
         // Check model and input for the cols and get the max value.
@@ -99,10 +95,10 @@ class TranslatedTableTextCols
         $arrValues = $attribute ? $attribute->get('name') : array();
 
         $languageEvent = new LoadLanguageFileEvent('languages');
-        $event
-            ->getEnvironment()
-            ->getEventPropagator()
-            ->propagate(ContaoEvents::SYSTEM_LOAD_LANGUAGE_FILE, $languageEvent);
+        $this
+            ->getServiceContainer()
+            ->getEventDispatcher()
+            ->dispatch(ContaoEvents::SYSTEM_LOAD_LANGUAGE_FILE, $languageEvent);
 
         $arrLanguages = array();
         foreach ((array) $objMetaModel->getAvailableLanguages() as $strLangCode) {
@@ -161,10 +157,18 @@ class TranslatedTableTextCols
      * @param DecodePropertyValueForWidgetEvent $event The event.
      *
      * @return void
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.NPathComplexity)
      */
-    public static function loadValues(DecodePropertyValueForWidgetEvent $event)
+    public function loadValues(DecodePropertyValueForWidgetEvent $event)
     {
-        $objMetaModel = AttributeBase::getMetaModelFromModel($event->getModel());
+        if (($event->getEnvironment()->getDataDefinition()->getName() !== 'tl_metamodel_attribute')
+            || ($event->getProperty() !== 'translatedtabletext_cols')) {
+            return;
+        }
+
+        $objMetaModel = $this->getMetaModelById($event->getModel()->getProperty('pid'));
         $arrLanguages = $objMetaModel->getAvailableLanguages();
 
         // Check model and input for the cols and get the max value.
@@ -221,9 +225,14 @@ class TranslatedTableTextCols
      *
      * @return void
      */
-    public static function saveValues(EncodePropertyValueFromWidgetEvent $event)
+    public function saveValues(EncodePropertyValueFromWidgetEvent $event)
     {
-        $objMetaModel = AttributeBase::getMetaModelFromModel($event->getModel());
+        if (($event->getEnvironment()->getDataDefinition()->getName() !== 'tl_metamodel_attribute')
+            || ($event->getProperty() !== 'translatedtabletext_cols')) {
+            return;
+        }
+
+        $objMetaModel = $this->getMetaModelById($event->getModel()->getProperty('pid'));
         $varValue     = $event->getValue();
 
         // Not translated, make it a plain string.
