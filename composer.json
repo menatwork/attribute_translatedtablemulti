@@ -34,7 +34,7 @@
   },
   "require": {
     "php": ">=5.3",
-    "contao/core": ">=3.2,<3.5",
+    "contao/core": ">=3.2,<3.6",
     "contao-community-alliance/composer-plugin": "~2.0",
     "metamodels/core": "~2.0"
   },
@@ -59,7 +59,7 @@
       "transifex": {
         "project": "metamodels",
         "prefix": "attribute_translatedtabletext-",
-        "languages_cto": "src/system/modules/metamodelsattribute_translatedtabletext/languages",
+        "languages_cto": "contao/languages",
         "languages_tx": ".tx"
       }
     },
