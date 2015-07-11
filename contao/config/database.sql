@@ -16,7 +16,7 @@ CREATE TABLE `tl_metamodel_translatedtabletext` (
   `tstamp` int(10) unsigned NOT NULL default '0',
   `att_id` int(10) unsigned NOT NULL default '0',
   `item_id` int(10) unsigned NOT NULL default '0',
-  `langcode` varchar(2) NOT NULL default '',
+  `langcode` varchar(5) NOT NULL default '',
   `row` int(5) unsigned NOT NULL default '0',
   `col` int(5) unsigned NOT NULL default '0',
   `value` varchar(255) NOT NULL default '',
