@@ -345,7 +345,23 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
      */
     public function unsetDataFor($arrIds)
     {
-        // TODO: implement.
-        return array();
+        if (!is_array($arrIds)) {
+            throw new \RuntimeException(
+                'TranslatedTableText::unsetDataFor() invalid parameter given! Array of ids is needed.',
+                1
+            );
+        }
+
+        if (empty($arrIds)) {
+            return;
+        }
+
+        $objDB    = $this->getMetaModel()->getServiceContainer()->getDatabase();
+        $arrWhere = $this->getWhere($arrIds);
+        $strQuery = 'DELETE FROM ' . $this->getValueTable() . ($arrWhere ? ' WHERE ' . $arrWhere['procedure'] : '');
+
+        $objDB
+            ->prepare($strQuery)
+            ->execute(($arrWhere ? $arrWhere['params'] : null));
     }
 }
