@@ -232,6 +232,7 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
 
     /**
      * {@inheritDoc}
+     *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function searchForInLanguages($strPattern, $arrLanguages = array())
@@ -311,6 +312,7 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
 
     /**
      * {@inheritDoc}
+     *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function getFilterOptions($idList, $usedOnly, &$arrCount = null)
@@ -320,6 +322,7 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
 
     /**
      * {@inheritDoc}
+     *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function setDataFor($arrValues)
@@ -330,6 +333,7 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
 
     /**
      * {@inheritDoc}
+     *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function getDataFor($arrIds)
@@ -340,6 +344,9 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
 
     /**
      * {@inheritDoc}
+     *
+     * @throws \RuntimeException When the passed value is not an array of ids.
+     *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function unsetDataFor($arrIds)
