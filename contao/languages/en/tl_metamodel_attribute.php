@@ -6,14 +6,12 @@
  * The Front-End modules allow you to build powerful listing and filtering of the
  * data in each collection.
  *
- * PHP version 5
- * @package     MetaModels
- * @subpackage  AttributeTableText
- * @author      David Maack <david.maack@arcor.de>
- * @author      Stefan Heimes <stefan_heimes@hotmail.com>
- * @copyright   The MetaModels team.
- * @license     LGPL.
- * @filesource
+ * @package    MetaModels
+ * @subpackage AttributeTableText
+ * @author     David Maack <david.maack@arcor.de>
+ * @author     Stefan Heimes <stefan_heimes@hotmail.com>
+ * @copyright  2012-2016 The MetaModels team.
+ * @license    https://github.com/MetaModels/attribute_translatedtabletext/blob/master/LICENSE LGPL-3.0
  */
 
 /**
