@@ -99,7 +99,7 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
      *
      * @param mixed  $mixIds      One, none or many ids to use.
      *
-     * @param string $strLangCode The language code.
+     * @param string $strLangCode The language code, optional.
      *
      * @param int    $intRow      The row number, optional.
      *
@@ -107,7 +107,7 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
      *
      * @return string
      */
-    protected function getWhere($mixIds, $strLangCode, $intRow = null, $intCol = null)
+    protected function getWhere($mixIds, $strLangCode = null, $intRow = null, $intCol = null)
     {
         $arrReturn = array(
             'procedure' => 'att_id=?',
@@ -327,8 +327,7 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
      */
     public function setDataFor($arrValues)
     {
-        // TODO: implement.
-        return array();
+        $this->setTranslatedDataFor($arrValues, $this->getMetaModel()->getActiveLanguage());
     }
 
     /**
@@ -338,8 +337,29 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
      */
     public function getDataFor($arrIds)
     {
-        // TODO: implement.
-        return array();
+        $strActiveLanguage   = $this->getMetaModel()->getActiveLanguage();
+        $strFallbackLanguage = $this->getMetaModel()->getFallbackLanguage();
+
+        $arrReturn = $this->getTranslatedDataFor($arrIds, $strActiveLanguage);
+
+        // Second round, fetch fallback languages if not all items could be resolved.
+        if ((count($arrReturn) < count($arrIds)) && ($strActiveLanguage != $strFallbackLanguage)) {
+            $arrFallbackIds = array();
+            foreach ($arrIds as $intId) {
+                if (empty($arrReturn[$intId])) {
+                    $arrFallbackIds[] = $intId;
+                }
+            }
+
+            if ($arrFallbackIds) {
+                $arrFallbackData = $this->getTranslatedDataFor($arrFallbackIds, $strFallbackLanguage);
+                // Cannot use array_merge here as it would renumber the keys.
+                foreach ($arrFallbackData as $intId => $arrValue) {
+                    $arrReturn[$intId] = $arrValue;
+                }
+            }
+        }
+        return $arrReturn;
     }
 
     /**
