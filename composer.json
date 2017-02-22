@@ -1,5 +1,5 @@
 {
-  "name": "metamodels/attribute_translatedtabletext",
+  "name": "metamodels/attribute_translatedmulti",
   "description": "MetaModels attribute for dynamic translated table text",
   "keywords": [
     "contao",
