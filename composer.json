@@ -1,5 +1,5 @@
 {
-  "name": "metamodels/attribute_translatedmulti",
+  "name": "menatwork/attribute_translatedmulti",
   "description": "MetaModels attribute for dynamic translated table text",
   "keywords": [
     "contao",
@@ -27,10 +27,8 @@
   ],
   "support": {
     "email": "mail@metamodel.me",
-    "issues": "https://github.com/MetaModels/attribute_translatedtabletext/issues",
-    "wiki": "http://de.contaowiki.org/MetaModels",
-    "irc": "irc://irc.freenode.org/contao.mm",
-    "source": "https://github.com/MetaModels/attribute_translatedtabletext"
+    "issues": "https://github.com/menatwork/attribute_translatedmulti/issues",
+    "source": "https://github.com/menatwork/attribute_translatedmulti"
   },
   "require": {
     "php": ">=5.4",
@@ -55,18 +53,12 @@
   "extra": {
     "contao": {
       "symlinks": {
-        "contao": "system/modules/metamodelsattribute_translatedtabletext"
-      },
-      "transifex": {
-        "project": "metamodels",
-        "prefix": "attribute_translatedtabletext-",
-        "languages_cto": "contao/languages",
-        "languages_tx": ".tx"
+        "contao": "system/modules/metamodelsattribute_translatedmulti"
       }
     },
     "branch-alias": {
-      "dev-master": "2.0.x-dev",
-      "dev-develop": "2.1.x-dev"
+      "dev-master": "2.1.x-dev",
+      "dev-develop": "2.2.x-dev"
     }
   },
   "prefer-stable": true
