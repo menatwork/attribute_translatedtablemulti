@@ -19,7 +19,7 @@ CREATE TABLE `tl_metamodel_translatedmulti` (
   `langcode` varchar(5) NOT NULL default '',
   `row` int(5) unsigned NOT NULL default '0',
   `col` varchar(255) NOT NULL default '',
-  `value` text NOT NULL default '',
+  `value` text NULL,
   PRIMARY KEY  (`id`),
   KEY `attitem` (`att_id`, `item_id`),
   UNIQUE KEY `attitemrowcol` (`att_id`, `item_id`, `row`, `col`, `langcode`)
