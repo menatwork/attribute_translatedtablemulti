@@ -20,3 +20,4 @@
 /**
  * Table tl_metamodel_attribute
  */
+$GLOBALS['TL_DCA']['tl_metamodel_attribute']['metapalettes']['translatedmulti extends _complexattribute_'] = array();

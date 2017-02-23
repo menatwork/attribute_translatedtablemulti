@@ -17,9 +17,21 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_metamodel_attribute']['typeOptions']['translatedtabletext']  = 'Translated table text';
-$GLOBALS['TL_LANG']['tl_metamodel_attribute']['tabletext_cols']                      = array('Column config', 'Please enter a label and width for each column.');
-$GLOBALS['TL_LANG']['tl_metamodel_attribute']['tabletext_rowLabels']                 = array('');
-$GLOBALS['TL_LANG']['tl_metamodel_attribute']['tabletext_rowLabel']                  = array('Label', 'Please enter the labels for the columns');
-$GLOBALS['TL_LANG']['tl_metamodel_attribute']['tabletext_rowStyle']                  = array('Width', 'Please enter the width of the columns (e.g. 200px)');
-$GLOBALS['TL_LANG']['tl_metamodel_attribute']['tabletext_quantity_cols']             = array('Number of columns','Please select the number of columns.');
+$GLOBALS['TL_LANG']['tl_metamodel_attribute']['typeOptions']['translatedmulti'] = 'Translated multi table';
+$GLOBALS['TL_LANG']['tl_metamodel_attribute']['tabletext_cols']                 = array(
+    'Column config',
+    'Please enter a label and width for each column.'
+);
+$GLOBALS['TL_LANG']['tl_metamodel_attribute']['tabletext_rowLabels']            = array('');
+$GLOBALS['TL_LANG']['tl_metamodel_attribute']['tabletext_rowLabel']             = array(
+    'Label',
+    'Please enter the labels for the columns'
+);
+$GLOBALS['TL_LANG']['tl_metamodel_attribute']['tabletext_rowStyle']             = array(
+    'Width',
+    'Please enter the width of the columns (e.g. 200px)'
+);
+$GLOBALS['TL_LANG']['tl_metamodel_attribute']['tabletext_quantity_cols']        = array(
+    'Number of columns',
+    'Please select the number of columns.'
+);

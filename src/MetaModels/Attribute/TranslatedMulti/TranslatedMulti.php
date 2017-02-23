@@ -39,9 +39,7 @@ class TranslatedMulti extends Base implements ITranslated, IComplex
      */
     public function getAttributeSettingNames()
     {
-        return array_merge(parent::getAttributeSettingNames(), array(
-            // ...
-        ));
+        return array_merge(parent::getAttributeSettingNames(), array());
     }
 
     /**
@@ -51,7 +49,7 @@ class TranslatedMulti extends Base implements ITranslated, IComplex
      */
     protected function getValueTable()
     {
-        return 'tl_metamodel_translatedtabletext';
+        return 'tl_metamodel_translatedmulti';
     }
 
     /**
@@ -66,6 +64,14 @@ class TranslatedMulti extends Base implements ITranslated, IComplex
 
         // Check for override in local config
         if (isset($GLOBALS['TL_CONFIG']['metamodelsattribute_multi'][$strTable][$strField])) {
+            // Cleanup the config.
+            $config = $GLOBALS['TL_CONFIG']['metamodelsattribute_multi'][$strTable][$strField];
+            foreach ($config['columnFields'] as $col => $data) {
+                $config['columnFields']['col_' . $col] = $data;
+                unset($config['columnFields'][$col]);
+            }
+
+            // Build the array();
             $arrFieldDef['inputType'] = 'multiColumnWizard';
             $arrFieldDef['eval']      = $GLOBALS['TL_CONFIG']['metamodelsattribute_multi'][$strTable][$strField];
         } else {
@@ -93,28 +99,28 @@ class TranslatedMulti extends Base implements ITranslated, IComplex
     {
         $arrReturn = array(
             'procedure' => 'att_id=?',
-            'params' => array(intval($this->get('id'))),
+            'params'    => array(intval($this->get('id'))),
         );
 
         if ($mixIds) {
             if (is_array($mixIds)) {
                 $arrReturn['procedure'] .= ' AND item_id IN (' . $this->parameterMask($mixIds) . ')';
-                $arrReturn['params']     = array_merge($arrReturn['params'], $mixIds);
+                $arrReturn['params'] = array_merge($arrReturn['params'], $mixIds);
             } else {
                 $arrReturn['procedure'] .= ' AND item_id=?';
-                $arrReturn['params'][]   = $mixIds;
+                $arrReturn['params'][] = $mixIds;
             }
         }
 
         if (is_int($intRow) && is_int($intCol)) {
             $arrReturn['procedure'] .= ' AND row = ? AND col = ?';
-            $arrReturn['params'][]   = $intRow;
-            $arrReturn['params'][]   = $intCol;
+            $arrReturn['params'][] = $intRow;
+            $arrReturn['params'][] = $intCol;
         }
 
         if ($strLangCode) {
             $arrReturn['procedure'] .= ' AND langcode=?';
-            $arrReturn['params'][]   = $strLangCode;
+            $arrReturn['params'][] = $strLangCode;
         }
 
         return $arrReturn;
@@ -132,7 +138,7 @@ class TranslatedMulti extends Base implements ITranslated, IComplex
         $widgetValue = array();
         foreach ($varValue as $row) {
             foreach ($row as $key => $col) {
-                $widgetValue[$col['row']]['col_' . $key] = $col['value'];
+                $widgetValue[$col['row']]['col_' . $col['col']] = $col['value'];
             }
         }
 
@@ -177,10 +183,10 @@ class TranslatedMulti extends Base implements ITranslated, IComplex
     {
         return array(
             'tstamp'   => time(),
-            'value'    => (string) $arrCell['value'],
+            'value'    => (string)$arrCell['value'],
             'att_id'   => $this->get('id'),
-            'row'      => (int) $arrCell['row'],
-            'col'      => (int) $arrCell['col'],
+            'row'      => (int)$arrCell['row'],
+            'col'      => $arrCell['col'],
             'item_id'  => $intId,
             'langcode' => $strLangCode,
         );
@@ -341,6 +347,7 @@ class TranslatedMulti extends Base implements ITranslated, IComplex
                 }
             }
         }
+
         return $arrReturn;
     }
 
@@ -355,7 +362,7 @@ class TranslatedMulti extends Base implements ITranslated, IComplex
     {
         if (!is_array($arrIds)) {
             throw new \RuntimeException(
-                'TranslatedTableText::unsetDataFor() invalid parameter given! Array of ids is needed.',
+                'TranslatedMulti::unsetDataFor() invalid parameter given! Array of ids is needed.',
                 1
             );
         }

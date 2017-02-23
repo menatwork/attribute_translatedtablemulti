@@ -20,5 +20,5 @@
  * Register the templates
  */
 TemplateLoader::addFiles(array(
-    'mm_attr_translatedtabletext' => 'system/modules/metamodelsattribute_translatedtabletext/templates',
+    'mm_attr_translatedmulti' => 'system/modules/metamodelsattribute_translatedmulti/templates',
 ));
