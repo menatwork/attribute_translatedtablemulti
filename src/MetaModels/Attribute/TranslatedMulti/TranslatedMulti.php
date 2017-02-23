@@ -213,7 +213,7 @@ class TranslatedMulti extends Base implements ITranslated, IComplex
 
         $arrReturn = array();
         while ($objValue->next()) {
-            $arrReturn[$objValue->item_id][$objValue->row][] = $objValue->row();
+            $arrReturn[$objValue->item_id][$objValue->row][$objValue->col] = $objValue->row();
         }
 
         return $arrReturn;
