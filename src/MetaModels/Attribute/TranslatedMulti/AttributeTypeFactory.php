@@ -13,7 +13,7 @@
  * @filesource
  */
 
-namespace MetaModels\Attribute\TranslatedTableText;
+namespace MetaModels\Attribute\TranslatedMulti;
 
 use MetaModels\Attribute\AbstractAttributeTypeFactory;
 
@@ -28,8 +28,8 @@ class AttributeTypeFactory extends AbstractAttributeTypeFactory
     public function __construct()
     {
         parent::__construct();
-        $this->typeName  = 'translatedtabletext';
-        $this->typeIcon  = 'system/modules/metamodelsattribute_translatedtabletext/html/translatedtabletext.png';
-        $this->typeClass = 'MetaModels\Attribute\TranslatedTableText\TranslatedTableText';
+        $this->typeName  = 'translatedmulti';
+        $this->typeIcon  = 'system/modules/metamodelsattribute_translatedmulti/html/translatedtabletext.png';
+        $this->typeClass = 'MetaModels\Attribute\TranslatedMulti\TranslatedMulti';
     }
 }

@@ -18,11 +18,11 @@
  * @filesource
  */
 
-namespace MetaModels\Attribute\TranslatedTableText;
+namespace MetaModels\Attribute\TranslatedMulti;
 
 use MetaModels\Attribute\Base;
-use MetaModels\Attribute\ITranslated;
 use MetaModels\Attribute\IComplex;
+use MetaModels\Attribute\ITranslated;
 
 /**
  * This is the MetaModelAttribute class for handling translated table text fields.
@@ -32,7 +32,7 @@ use MetaModels\Attribute\IComplex;
  * @author     David Maack <david.maack@arcor.de>
  * @author     Stefan Heimes <stefan_heimes@hotmail.com>
  */
-class TranslatedTableText extends Base implements ITranslated, IComplex
+class TranslatedMulti extends Base implements ITranslated, IComplex
 {
     /**
      * {@inheritDoc}
@@ -40,7 +40,7 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
     public function getAttributeSettingNames()
     {
         return array_merge(parent::getAttributeSettingNames(), array(
-            'translatedtabletext_cols',
+            // ...
         ));
     }
 
@@ -59,36 +59,18 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
      */
     public function getFieldDefinition($arrOverrides = array())
     {
-        $strActiveLanguage   = $this->getMetaModel()->getActiveLanguage();
-        $strFallbackLanguage = $this->getMetaModel()->getFallbackLanguage();
-        $arrAllColLabels     = deserialize($this->get('translatedtabletext_cols'), true);
-        $arrColLabels        = null;
+        // Get table and column
+        $strTable     = $this->getMetaModel()->getTableName();
+        $strField     = $this->getColName();
+        $arrColLabels = null;
 
-        if (array_key_exists($strActiveLanguage, $arrAllColLabels)) {
-            $arrColLabels = $arrAllColLabels[$strActiveLanguage];
-        } elseif (array_key_exists($strActiveLanguage, $strFallbackLanguage)) {
-            $arrColLabels = $arrAllColLabels[$strFallbackLanguage];
+        // Check for override in local config
+        if (isset($GLOBALS['TL_CONFIG']['metamodelsattribute_multi'][$strTable][$strField])) {
+            $arrFieldDef['inputType'] = 'multiColumnWizard';
+            $arrFieldDef['eval']      = $GLOBALS['TL_CONFIG']['metamodelsattribute_multi'][$strTable][$strField];
         } else {
-            $arrColLabels = array_pop(array_reverse($arrAllColLabels));
-        }
-
-        // Build DCA.
-        $arrFieldDef                         = parent::getFieldDefinition($arrOverrides);
-        $arrFieldDef['inputType']            = 'multiColumnWizard';
-        $arrFieldDef['eval']['columnFields'] = array();
-
-        $count = count($arrColLabels);
-        for ($i = 0; $i < $count; $i++) {
-            $arrFieldDef['eval']['columnFields']['col_' . $i] = array(
-                'label' => $arrColLabels[$i]['rowLabel'],
-                'inputType' => 'text',
-                'eval' => array(),
-            );
-
-            if ($arrColLabels[$i]['rowStyle']) {
-                $arrFieldDef['eval']['columnFields']['col_' . $i]['eval']['style'] =
-                    'width:' . $arrColLabels[$i]['rowStyle'];
-            }
+            $arrFieldDef['inputType'] = 'multiColumnWizard';
+            $arrFieldDef['eval']      = array();
         }
 
         return $arrFieldDef;
