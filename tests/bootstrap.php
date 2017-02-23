@@ -11,7 +11,7 @@
  * @author     Christian Schiffler <c.schiffler@cyberspectrum.de>
  * @author     David Greminger <david.greminger@1up.io>
  * @copyright  2012-2016 The MetaModels team.
- * @license    https://github.com/MetaModels/attribute_translatedtabletext/blob/master/LICENSE LGPL-3.0
+ * @license    https://github.com/menatwork/attribute_translatedmulti/blob/master/LICENSE LGPL-3.0
  * @filesource
  */
 

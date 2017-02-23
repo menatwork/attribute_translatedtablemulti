@@ -14,15 +14,15 @@
  * @author     Andreas Isaak <andy.jared@googlemail.com>
  * @author     David Greminger <david.greminger@1up.io>
  * @copyright  2012-2016 The MetaModels team.
- * @license    https://github.com/MetaModels/attribute_translatedtabletext/blob/master/LICENSE LGPL-3.0
+ * @license    https://github.com/menatwork/attribute_translatedmulti/blob/master/LICENSE LGPL-3.0
  * @filesource
  */
 
-namespace MetaModels\Attribute\TranslatedTableText;
+namespace MetaModels\Attribute\TranslatedMulti;
 
 use MetaModels\Attribute\Base;
-use MetaModels\Attribute\ITranslated;
 use MetaModels\Attribute\IComplex;
+use MetaModels\Attribute\ITranslated;
 
 /**
  * This is the MetaModelAttribute class for handling translated table text fields.
@@ -32,16 +32,14 @@ use MetaModels\Attribute\IComplex;
  * @author     David Maack <david.maack@arcor.de>
  * @author     Stefan Heimes <stefan_heimes@hotmail.com>
  */
-class TranslatedTableText extends Base implements ITranslated, IComplex
+class TranslatedMulti extends Base implements ITranslated, IComplex
 {
     /**
      * {@inheritDoc}
      */
     public function getAttributeSettingNames()
     {
-        return array_merge(parent::getAttributeSettingNames(), array(
-            'translatedtabletext_cols',
-        ));
+        return array_merge(parent::getAttributeSettingNames(), array());
     }
 
     /**
@@ -51,7 +49,7 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
      */
     protected function getValueTable()
     {
-        return 'tl_metamodel_translatedtabletext';
+        return 'tl_metamodel_translatedmulti';
     }
 
     /**
@@ -59,36 +57,26 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
      */
     public function getFieldDefinition($arrOverrides = array())
     {
-        $strActiveLanguage   = $this->getMetaModel()->getActiveLanguage();
-        $strFallbackLanguage = $this->getMetaModel()->getFallbackLanguage();
-        $arrAllColLabels     = deserialize($this->get('translatedtabletext_cols'), true);
-        $arrColLabels        = null;
+        // Get table and column
+        $strTable     = $this->getMetaModel()->getTableName();
+        $strField     = $this->getColName();
+        $arrColLabels = null;
 
-        if (array_key_exists($strActiveLanguage, $arrAllColLabels)) {
-            $arrColLabels = $arrAllColLabels[$strActiveLanguage];
-        } elseif ($strActiveLanguage == $strFallbackLanguage) {
-            $arrColLabels = $arrAllColLabels[$strFallbackLanguage];
-        } else {
-            $arrColLabels = array_pop(array_reverse($arrAllColLabels));
-        }
-
-        // Build DCA.
-        $arrFieldDef                         = parent::getFieldDefinition($arrOverrides);
-        $arrFieldDef['inputType']            = 'multiColumnWizard';
-        $arrFieldDef['eval']['columnFields'] = array();
-
-        $count = count($arrColLabels);
-        for ($i = 0; $i < $count; $i++) {
-            $arrFieldDef['eval']['columnFields']['col_' . $i] = array(
-                'label' => $arrColLabels[$i]['rowLabel'],
-                'inputType' => 'text',
-                'eval' => array(),
-            );
-
-            if ($arrColLabels[$i]['rowStyle']) {
-                $arrFieldDef['eval']['columnFields']['col_' . $i]['eval']['style'] =
-                    'width:' . $arrColLabels[$i]['rowStyle'];
+        // Check for override in local config
+        if (isset($GLOBALS['TL_CONFIG']['metamodelsattribute_multi'][$strTable][$strField])) {
+            // Cleanup the config.
+            $config = $GLOBALS['TL_CONFIG']['metamodelsattribute_multi'][$strTable][$strField];
+            foreach ($config['columnFields'] as $col => $data) {
+                $config['columnFields']['col_' . $col] = $data;
+                unset($config['columnFields'][$col]);
             }
+
+            // Build the array();
+            $arrFieldDef['inputType'] = 'multiColumnWizard';
+            $arrFieldDef['eval']      = $GLOBALS['TL_CONFIG']['metamodelsattribute_multi'][$strTable][$strField];
+        } else {
+            $arrFieldDef['inputType'] = 'multiColumnWizard';
+            $arrFieldDef['eval']      = array();
         }
 
         return $arrFieldDef;
@@ -111,28 +99,28 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
     {
         $arrReturn = array(
             'procedure' => 'att_id=?',
-            'params' => array(intval($this->get('id'))),
+            'params'    => array(intval($this->get('id'))),
         );
 
         if ($mixIds) {
             if (is_array($mixIds)) {
                 $arrReturn['procedure'] .= ' AND item_id IN (' . $this->parameterMask($mixIds) . ')';
-                $arrReturn['params']     = array_merge($arrReturn['params'], $mixIds);
+                $arrReturn['params'] = array_merge($arrReturn['params'], $mixIds);
             } else {
                 $arrReturn['procedure'] .= ' AND item_id=?';
-                $arrReturn['params'][]   = $mixIds;
+                $arrReturn['params'][] = $mixIds;
             }
         }
 
         if (is_int($intRow) && is_int($intCol)) {
             $arrReturn['procedure'] .= ' AND row = ? AND col = ?';
-            $arrReturn['params'][]   = $intRow;
-            $arrReturn['params'][]   = $intCol;
+            $arrReturn['params'][] = $intRow;
+            $arrReturn['params'][] = $intCol;
         }
 
         if ($strLangCode) {
             $arrReturn['procedure'] .= ' AND langcode=?';
-            $arrReturn['params'][]   = $strLangCode;
+            $arrReturn['params'][] = $strLangCode;
         }
 
         return $arrReturn;
@@ -150,7 +138,7 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
         $widgetValue = array();
         foreach ($varValue as $row) {
             foreach ($row as $key => $col) {
-                $widgetValue[$col['row']]['col_' . $key] = $col['value'];
+                $widgetValue[$col['row']]['col_' . $col['col']] = $col['value'];
             }
         }
 
@@ -195,10 +183,10 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
     {
         return array(
             'tstamp'   => time(),
-            'value'    => (string) $arrCell['value'],
+            'value'    => (string)$arrCell['value'],
             'att_id'   => $this->get('id'),
-            'row'      => (int) $arrCell['row'],
-            'col'      => (int) $arrCell['col'],
+            'row'      => (int)$arrCell['row'],
+            'col'      => $arrCell['col'],
             'item_id'  => $intId,
             'langcode' => $strLangCode,
         );
@@ -359,6 +347,7 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
                 }
             }
         }
+
         return $arrReturn;
     }
 
@@ -373,7 +362,7 @@ class TranslatedTableText extends Base implements ITranslated, IComplex
     {
         if (!is_array($arrIds)) {
             throw new \RuntimeException(
-                'TranslatedTableText::unsetDataFor() invalid parameter given! Array of ids is needed.',
+                'TranslatedMulti::unsetDataFor() invalid parameter given! Array of ids is needed.',
                 1
             );
         }
