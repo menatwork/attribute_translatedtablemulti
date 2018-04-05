@@ -7,17 +7,18 @@
  * data in each collection.
  *
  * @package    MetaModels
- * @subpackage AttributeTranslatedTableText
+ * @subpackage AttributeTranslatedMulti
  * @author     Christian Schiffler <c.schiffler@cyberspectrum.de>
  * @author     Andreas Isaak <andy.jared@googlemail.com>
  * @author     David Greminger <david.greminger@1up.io>
- * @copyright  2012-2016 The MetaModels team.
+ * @copyright  2018 MenAtWork
+ * @copyright  2018 The MetaModels team.
  * @license    https://github.com/menatwork/attribute_translatedmulti/blob/master/LICENSE LGPL-3.0
  * @filesource
  */
 
-/**
- * Table tl_metamodel_filtersetting
- */
-
-$GLOBALS['TL_DCA']['tl_metamodel_filtersetting']['simplelookup_palettes']['translatedmulti'] = &$GLOBALS['TL_DCA']['tl_metamodel_filtersetting']['simplelookup_palettes']['_translated_'];
+$GLOBALS['TL_DCA']['tl_metamodel_dcasetting']['metasubselectpalettes']['attr_id']['translatedmulti'] = array(
+    'presentation' => array(
+        'tl_class',
+    ),
+);

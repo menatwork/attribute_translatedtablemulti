@@ -1,0 +1,7 @@
+services:
+  metamodels.attribute_translatedmulti.factory:
+    class: MetaModels\AttributeTranslatedMultiBundle\Attribute\AttributeTypeFactory
+    arguments:
+      - "@database_connection"
+    tags:
+      - { name: metamodels.attribute_factory }

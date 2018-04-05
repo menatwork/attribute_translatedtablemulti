@@ -1,3 +1,6 @@
-# Paths to exclude from scanning (equivalent to cmd line parameter --exclude=...)
+ignore:
+  - "Mini Model <minimodel@metamodel.me>"
+  - "Scrutinizer Auto-Fixer <auto-fixer@scrutinizer-ci.com>"
+
 exclude:
-  - contao/languages
+  - languages

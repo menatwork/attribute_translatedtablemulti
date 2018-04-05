@@ -7,10 +7,11 @@
  * data in each collection.
  *
  * @package    MetaModels
- * @subpackage AttributeTableText
+ * @subpackage AttributeTranslatedMulti
  * @author     David Maack <david.maack@arcor.de>
  * @author     Stefan Heimes <stefan_heimes@hotmail.com>
- * @copyright  2012-2016 The MetaModels team.
+ * @copyright  2018 MenAtWork
+ * @copyright  2018 The MetaModels team.
  * @license    https://github.com/menatwork/attribute_translatedmulti/blob/master/LICENSE LGPL-3.0
  */
 

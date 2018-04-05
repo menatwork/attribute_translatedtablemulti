@@ -11,13 +11,10 @@
  * @author     Christian Schiffler <c.schiffler@cyberspectrum.de>
  * @author     Andreas Isaak <andy.jared@googlemail.com>
  * @author     David Greminger <david.greminger@1up.io>
- * @copyright  2012-2016 The MetaModels team.
+ * @copyright  2018 MenAtWork
+ * @copyright  2018 The MetaModels team.
  * @license    https://github.com/menatwork/attribute_translatedmulti/blob/master/LICENSE LGPL-3.0
  * @filesource
  */
 
-$GLOBALS['TL_DCA']['tl_metamodel_dcasetting']['metasubselectpalettes']['attr_id']['translatedtabletext'] = array(
-    'presentation' => array(
-        'tl_class',
-    ),
-);
+$GLOBALS['TL_DCA']['tl_metamodel_rendersetting']['metapalettes']['translatedmulti extends default'] = array();

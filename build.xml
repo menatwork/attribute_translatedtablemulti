@@ -6,6 +6,6 @@
    https://github.com/phpcq/phpcq
 
 -->
-<project name="metamodels/attribute_translatedtabletext" default="build">
-    <import file="vendor/phpcq/phpcq/phpcq.main.xml"/>
+<project name="menatwork/attribute_translatedmulti" default="build">
+    <import file="vendor/phpcq/phpcq/phpcq.main.xml" />
 </project>
