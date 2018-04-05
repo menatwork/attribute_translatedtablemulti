@@ -111,6 +111,10 @@ class TranslatedMulti extends Base implements ITranslated, IComplex
         $strField     = $this->getColName();
         $arrColLabels = null;
 
+        $arrFieldDef                         = parent::getFieldDefinition($arrOverrides);
+        $arrFieldDef['inputType']            = 'multiColumnWizard';
+        $arrFieldDef['eval']['columnFields'] = array();
+
         // Check for override in local config
         if (isset($GLOBALS['TL_CONFIG']['metamodelsattribute_multi'][$strTable][$strField])) {
             // Cleanup the config.
@@ -122,10 +126,7 @@ class TranslatedMulti extends Base implements ITranslated, IComplex
 
             // Build the array();
             $arrFieldDef['inputType'] = 'multiColumnWizard';
-            $arrFieldDef['eval']      = $GLOBALS['TL_CONFIG']['metamodelsattribute_multi'][$strTable][$strField];
-        } else {
-            $arrFieldDef['inputType'] = 'multiColumnWizard';
-            $arrFieldDef['eval']      = array();
+            $arrFieldDef['eval']      = $config;
         }
 
         return $arrFieldDef;
@@ -249,7 +250,7 @@ class TranslatedMulti extends Base implements ITranslated, IComplex
         $statement = $queryBuilder->execute();
         $arrReturn = array();
         while ($value = $statement->fetch(\PDO::FETCH_ASSOC)) {
-            $arrReturn[$value['item_id']][$value['row']][] = $value;
+            $arrReturn[$value['item_id']][$value['row']][$value['col']] = $value;
         }
 
         return $arrReturn;
