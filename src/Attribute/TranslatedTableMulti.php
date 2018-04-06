@@ -7,7 +7,7 @@
  * data in each collection.
  *
  * @package    MetaModels
- * @subpackage AttributeTranslatedMulti
+ * @subpackage AttributeTranslatedTableMultiBundle
  * @author     David Maack <david.maack@arcor.de>
  * @author     Stefan Heimes <stefan_heimes@hotmail.com>
  * @author     Christian Schiffler <c.schiffler@cyberspectrum.de>
@@ -16,11 +16,11 @@
  * @author     Andreas Dziemba <dziemba@men-at-work.de>
  * @copyright  2018 MenAtWork
  * @copyright  2018 The MetaModels team.
- * @license    https://github.com/menatwork/attribute_translatedmulti/blob/master/LICENSE LGPL-3.0
+ * @license    https://github.com/menatwork/attribute_translatedtablemulti/blob/master/LICENSE LGPL-3.0-or-later
  * @filesource
  */
 
-namespace MetaModels\AttributeTranslatedMultiBundle\Attribute;
+namespace MetaModels\AttributeTranslatedTableMultiBundle\Attribute;
 
 use Contao\System;
 use Doctrine\DBAL\Query\QueryBuilder;
@@ -31,19 +31,19 @@ use MetaModels\IMetaModel;
 use Doctrine\DBAL\Connection;
 
 /**
- * This is the MetaModelAttribute class for handling translated multi fields.
+ * This is the MetaModelAttribute class for handling translated table multi fields.
  *
  * @package    MetaModels
- * @subpackage AttributeTranslatedMulti
+ * @subpackage AttributeTranslatedTableMulti
  * @author     David Maack <david.maack@arcor.de>
  * @author     Stefan Heimes <stefan_heimes@hotmail.com>
  * @author     Andreas Dziemba <dziemba@men-at-work.de>
  * @copyright  2018 MenAtWork
  * @copyright  2018 The MetaModels team.
- * @license    https://github.com/menatwork/attribute_translatedmulti/blob/master/LICENSE LGPL-3.0
+ * @license    https://github.com/menatwork/attribute_translatedtablemulti/blob/master/LICENSE LGPL-3.0-or-later
  */
 
-class TranslatedMulti extends Base implements ITranslated, IComplex
+class TranslatedTableMulti extends Base implements ITranslated, IComplex
 {
 
     /**
@@ -98,7 +98,7 @@ class TranslatedMulti extends Base implements ITranslated, IComplex
      */
     protected function getValueTable()
     {
-        return 'tl_metamodel_translatedmulti';
+        return 'tl_metamodel_translatedtablemulti';
     }
 
     /**
@@ -111,6 +111,10 @@ class TranslatedMulti extends Base implements ITranslated, IComplex
         $strField     = $this->getColName();
         $arrColLabels = null;
 
+        $arrFieldDef                         = parent::getFieldDefinition($arrOverrides);
+        $arrFieldDef['inputType']            = 'multiColumnWizard';
+        $arrFieldDef['eval']['columnFields'] = array();
+
         // Check for override in local config
         if (isset($GLOBALS['TL_CONFIG']['metamodelsattribute_multi'][$strTable][$strField])) {
             // Cleanup the config.
@@ -122,10 +126,7 @@ class TranslatedMulti extends Base implements ITranslated, IComplex
 
             // Build the array();
             $arrFieldDef['inputType'] = 'multiColumnWizard';
-            $arrFieldDef['eval']      = $GLOBALS['TL_CONFIG']['metamodelsattribute_multi'][$strTable][$strField];
-        } else {
-            $arrFieldDef['inputType'] = 'multiColumnWizard';
-            $arrFieldDef['eval']      = array();
+            $arrFieldDef['eval']      = $config;
         }
 
         return $arrFieldDef;
@@ -249,7 +250,7 @@ class TranslatedMulti extends Base implements ITranslated, IComplex
         $statement = $queryBuilder->execute();
         $arrReturn = array();
         while ($value = $statement->fetch(\PDO::FETCH_ASSOC)) {
-            $arrReturn[$value['item_id']][$value['row']][] = $value;
+            $arrReturn[$value['item_id']][$value['row']][$value['col']] = $value;
         }
 
         return $arrReturn;
@@ -387,7 +388,7 @@ class TranslatedMulti extends Base implements ITranslated, IComplex
     {
         if (!is_array($arrIds)) {
             throw new \RuntimeException(
-                'TranslatedMulti::unsetDataFor() invalid parameter given! Array of ids is needed.',
+                'TranslatedTableMulti::unsetDataFor() invalid parameter given! Array of ids is needed.',
                 1
             );
         }

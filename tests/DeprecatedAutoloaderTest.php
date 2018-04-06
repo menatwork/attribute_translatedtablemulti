@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of MetaModels/attribute_translatedmulti.
+ * This file is part of MetaModels/attribute_translatedtablemulti.
  *
  * (c) 2012-2017 The MetaModels team.
  *
@@ -11,25 +11,25 @@
  * This project is provided in good faith and hope to be usable by anyone.
  *
  * @package    MetaModels
- * @subpackage AttributeTranslatedMulti
+ * @subpackage AttributeTranslatedTableMulti
  * @author     David Molineus <david.molineus@netzmacht.de>
  * @author     Andreas Dziemba <dziemba@men-at-work.de>
  * @copyright  2018 MenAtWork
  * @copyright  2018 The MetaModels Team.
- * @license    https://github.com/menatwork/attribute_translatedmulti/blob/master/LICENSE LGPL-3.
+ * @license    https://github.com/menatwork/attribute_translatedtablemulti/blob/master/LICENSE LGPL-3.0-or-later
  * @filesource
  */
 
-namespace MetaModels\AttributeTranslatedMultiBundle\Test;
+namespace MetaModels\AttributeTranslatedTableMultiBundle\Test;
 
-use MetaModels\AttributeTranslatedMultiBundle\Attribute\AttributeTypeFactory;
-use MetaModels\AttributeTranslatedMultiBundle\Attribute\TranslatedMulti;
+use MetaModels\AttributeTranslatedTableMultiBundle\Attribute\AttributeTypeFactory;
+use MetaModels\AttributeTranslatedTableMultiBundle\Attribute\TranslatedTableMulti;
 use PHPUnit\Framework\TestCase;
 
 /**
  * This class tests if the deprecated autoloader works.
  *
- * @package MetaModels\AttributeTranslatedMultiBundle\Test
+ * @package MetaModels\AttributeTranslatedTableMultiBundle\Test
  */
 class DeprecatedAutoloaderTest extends TestCase
 {
@@ -39,8 +39,8 @@ class DeprecatedAutoloaderTest extends TestCase
      * @var array
      */
     private static $classes = [
-        'MetaModels\AttributeTranslatedMultiBundle\Attribute\TranslatedMulti'       => TranslatedMulti::class,
-        'MetaModels\AttributeTranslatedMultiBundle\Attribute\AttributeTypeFactory'  => AttributeTypeFactory::class
+        'MetaModels\AttributeTranslatedTableMultiBundle\Attribute\TranslatedTableMulti' => TranslatedTableMulti::class,
+        'MetaModels\AttributeTranslatedTableMultiBundle\Attribute\AttributeTypeFactory' => AttributeTypeFactory::class
     ];
 
     /**
@@ -69,7 +69,7 @@ class DeprecatedAutoloaderTest extends TestCase
      */
     public function testDeprecatedClassesAreMultied($oldClass, $newClass)
     {
-        $this->assertTrue(class_exists($oldClass), sprintf('Class TranslatedMulti "%s" is not found.', $oldClass));
+        $this->assertTrue(class_exists($oldClass), sprintf('Class TranslatedTableMulti "%s" is not found.', $oldClass));
 
         $oldClassReflection = new \ReflectionClass($oldClass);
         $newClassReflection = new \ReflectionClass($newClass);

@@ -13,7 +13,7 @@
  * @author     David Greminger <david.greminger@1up.io>
  * @copyright  2018 MenAtWork
  * @copyright  2018 The MetaModels team.
- * @license    https://github.com/menatwork/attribute_translatedmulti/blob/master/LICENSE LGPL-3.0
+ * @license    https://github.com/menatwork/attribute_translatedtablemulti/blob/master/LICENSE LGPL-3.0-or-later
  * @filesource
  */
 
@@ -21,4 +21,4 @@
  * Table tl_metamodel_filtersetting
  */
 
-$GLOBALS['TL_DCA']['tl_metamodel_filtersetting']['simplelookup_palettes']['translatedmulti'] = &$GLOBALS['TL_DCA']['tl_metamodel_filtersetting']['simplelookup_palettes']['_translated_'];
+$GLOBALS['TL_DCA']['tl_metamodel_filtersetting']['simplelookup_palettes']['translatedtablemulti'] = &$GLOBALS['TL_DCA']['tl_metamodel_filtersetting']['simplelookup_palettes']['_translated_'];

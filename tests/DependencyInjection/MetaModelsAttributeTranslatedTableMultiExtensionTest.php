@@ -1,7 +1,7 @@
 <?php
 
 /**
- * * This file is part of MetaModels/attribute_translatedmulti.
+ * * This file is part of MetaModels/attribute_translatedtablemulti.
  *
  * (c) 2012-2017 The MetaModels team.
  *
@@ -11,19 +11,19 @@
  * This project is provided in good faith and hope to be usable by anyone.
  *
  * @package    MetaModels
- * @subpackage AttributeTranslatedMulti
+ * @subpackage AttributeTranslatedTableMulti
  * @author     David Molineus <david.molineus@netzmacht.de>
  * @author     Andreas Dziemba <dziemba@men-at-work.de>
  * @copyright  2018 MenAtWork
  * @copyright  2018 The MetaModels Team.
- * @license    https://github.com/menatwork/attribute_translatedmulti/blob/master/LICENSE LGPL-3.
+ * @license    https://github.com/menatwork/attribute_translatedtablemulti/blob/master/LICENSE master/LICENSE LGPL-3.0-or-later
  * @filesource
  */
 
-namespace MetaModels\AttributeTranslatedMultiBundle\Test\DependencyInjection;
+namespace MetaModels\AttributeTranslatedTableMultiBundle\Test\DependencyInjection;
 
-use MetaModels\AttributeTranslatedMultiBundle\Attribute\AttributeTypeFactory;
-use MetaModels\AttributeTranslatedMultiBundle\DependencyInjection\MetaModelsAttributeTranslatedMultiExtension;
+use MetaModels\AttributeTranslatedTableMultiBundle\Attribute\AttributeTypeFactory;
+use MetaModels\AttributeTranslatedTableMultiBundle\DependencyInjection\MetaModelsAttributeTranslatedTableMultiExtension;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -32,7 +32,7 @@ use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 /**
  * This test case test the extension.
  */
-class MetaModelsAttributeTranslatedMultiExtensionTest extends TestCase
+class MetaModelsAttributeTranslatedTableMultiExtensionTest extends TestCase
 {
     /**
      * Test that extension can be instantiated.
@@ -41,9 +41,9 @@ class MetaModelsAttributeTranslatedMultiExtensionTest extends TestCase
      */
     public function testInstantiation()
     {
-        $extension = new MetaModelsAttributeTranslatedMultiExtension();
+        $extension = new MetaModelsAttributeTranslatedTableMultiExtension();
 
-        $this->assertInstanceOf(MetaModelsAttributeTranslatedMultiExtension::class, $extension);
+        $this->assertInstanceOf(MetaModelsAttributeTranslatedTableMultiExtension::class, $extension);
         $this->assertInstanceOf(ExtensionInterface::class, $extension);
     }
 
@@ -61,7 +61,7 @@ class MetaModelsAttributeTranslatedMultiExtensionTest extends TestCase
             ->method('setDefinition')
             ->withConsecutive(
                 [
-                    'metamodels.attribute_translatedmulti.factory',
+                    'metamodels.attribute_translatedtablemulti.factory',
                     $this->callback(
                         function ($value) {
                             /** @var Definition $value */
@@ -79,7 +79,7 @@ class MetaModelsAttributeTranslatedMultiExtensionTest extends TestCase
                 ]
             );
 
-        $extension = new MetaModelsAttributeTranslatedMultiExtension();
+        $extension = new MetaModelsAttributeTranslatedTableMultiExtension();
         $extension->load([], $container);
     }
 }

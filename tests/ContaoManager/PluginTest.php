@@ -1,7 +1,7 @@
 <?php
 
 /**
- * * This file is part of MetaModels/attribute_translatedmulti.
+ * * This file is part of MetaModels/attribute_translatedtablemulti.
  *
  * (c) 2012-2017 The MetaModels team.
  *
@@ -11,22 +11,22 @@
  * This project is provided in good faith and hope to be usable by anyone.
  *
  * @package    MetaModels
- * @subpackage AttributeTranslatedMulti
+ * @subpackage AttributeTranslatedTableMulti
  * @author     David Molineus <david.molineus@netzmacht.de>
  * @author     Andreas Dziemba <dziemba@men-at-work.de>
  * @copyright  2018 MenAtWork
  * @copyright  2018 The MetaModels Team.
- * @license    https://github.com/menatwork/attribute_translatedmulti/blob/master/LICENSE LGPL-3.
+ * @license    https://github.com/menatwork/attribute_translatedtablemulti/blob/master/LICENSE master/LICENSE LGPL-3.0-or-later
  * @filesource
  */
 
-namespace MetaModels\AttributeTranslatedMultiBundle\Test\ContaoManager;
+namespace MetaModels\AttributeTranslatedTableMultiBundle\Test\ContaoManager;
 
 use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
-use MetaModels\AttributeTranslatedMultiBundle\ContaoManager\Plugin;
+use MetaModels\AttributeTranslatedTableMultiBundle\ContaoManager\Plugin;
 use MetaModels\CoreBundle\MetaModelsCoreBundle;
 use PHPUnit\Framework\TestCase;
 
@@ -66,6 +66,6 @@ class PluginTest extends TestCase
         $bundleConfig = $bundles[0];
 
         $this->assertEquals($bundleConfig->getLoadAfter(), [ContaoCoreBundle::class, MetaModelsCoreBundle::class]);
-        $this->assertEquals($bundleConfig->getReplace(), ['metamodelsattribute_translatedmulti']);
+        $this->assertEquals($bundleConfig->getReplace(), ['metamodelsattribute_translatedtablemulti']);
     }
 }

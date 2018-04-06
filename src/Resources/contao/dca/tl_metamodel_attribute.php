@@ -7,18 +7,18 @@
  * data in each collection.
  *
  * @package    MetaModels
- * @subpackage AttributeTranslatedTableText
+ * @subpackage AttributeTranslatedTableMulti
  * @author     Christian Schiffler <c.schiffler@cyberspectrum.de>
  * @author     Andreas Isaak <andy.jared@googlemail.com>
  * @author     David Greminger <david.greminger@1up.io>
  * @author     Sven Baumann <baumann.sv@gmail.com>
  * @copyright  2018 MenAtWork
  * @copyright  2018 The MetaModels team.
- * @license    https://github.com/menatwork/attribute_translatedmulti/blob/master/LICENSE LGPL-3.0
+ * @license    https://github.com/menatwork/attribute_translatedtablemulti/blob/master/LICENSE LGPL-3.0-or-later
  * @filesource
  */
 
 /**
  * Table tl_metamodel_attribute
  */
-$GLOBALS['TL_DCA']['tl_metamodel_attribute']['metapalettes']['translatedmulti extends _complexattribute_'] = array();
+$GLOBALS['TL_DCA']['tl_metamodel_attribute']['metapalettes']['translatedtablemulti extends _complexattribute_'] = array();

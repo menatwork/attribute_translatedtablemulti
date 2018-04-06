@@ -6,6 +6,6 @@
    https://github.com/phpcq/phpcq
 
 -->
-<project name="menatwork/attribute_translatedmulti" default="build">
+<project name="menatwork/attribute_translatedtablemulti" default="build">
     <import file="vendor/phpcq/phpcq/phpcq.main.xml" />
 </project>

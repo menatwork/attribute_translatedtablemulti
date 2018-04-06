@@ -11,7 +11,7 @@
  * @author     Stefan Heimes <stefan_heimes@hotmail.com>
  * @copyright  2018 MenAtWork
  * @copyright  2018 The MetaModels team.
- * @license    https://github.com/menatwork/attribute_translatedmulti/blob/master/LICENSE LGPL-3.0
+ * @license    https://github.com/menatwork/attribute_translatedtablemulti/blob/master/LICENSE LGPL-3.0-or-later
  */
 
-$GLOBALS['TL_LANG']['tl_metamodel_attribute']['typeOptions']['translatedmulti'] = 'Übersetzter Multi-Tabelle';
+$GLOBALS['TL_LANG']['tl_metamodel_attribute']['typeOptions']['translatedtablemulti'] = 'Übersetzte Multi-Tabelle';

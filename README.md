@@ -1,7 +1,7 @@
-Translated multi table
+Translated table multi
 ======================
 
-The translated multi table attribute.
+The translated table multi attribute.
 
 With this attribute you are able to create complex table structures with the MultiColumnWizard.
 Create a config in the initConfig or somewhere else and write something like this:

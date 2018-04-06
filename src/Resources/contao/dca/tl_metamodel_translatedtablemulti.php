@@ -6,15 +6,15 @@
  * data in each collection.
  *
  * @package    MetaModels
- * @subpackage AttributeTranslatedMulti
+ * @subpackage AttributeTranslatedTableMulti
  * @author     Andreas Dziemba <dziemba@men-at-work.de>
  * @copyright  2018 MenAtWork
  * @copyright  2018 The MetaModels team.
- * @license    https://github.com/menatwork/attribute_translatedmulti/blob/master/LICENSE LGPL-3.0
+ * @license    https://github.com/menatwork/attribute_translatedtablemulti/blob/master/LICENSE LGPL-3.0-or-later
  * @filesource
  */
 
-$GLOBALS['TL_DCA']['tl_metamodel_translatedmulti'] = [
+$GLOBALS['TL_DCA']['tl_metamodel_translatedtablemulti'] = [
     'config'                            => [
         'sql'                           => [
             'keys'                      => [

@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of MetaModels/attribute_translatedmulti.
+ * This file is part of MetaModels/attribute_translatedtablemulti.
  *
  * (c) 2018 MenAtWork.
  *
@@ -10,19 +10,19 @@
  * This project is provided in good faith and hope to be usable by anyone.
  *
  * @package    MetaModels
- * @subpackage AttributeTranslatedMulti
+ * @subpackage AttributeTranslatedTableMulti
  * @author     Andreas Dziemba <dziemba@men-at-work.de>
  * @copyright  2018 MenAtWork
  * @copyright  2018 The MetaModels team.
  * @filesource
  */
-namespace MetaModels\AttributeTranslatedMultiBundle;
+namespace MetaModels\AttributeTranslatedTableMultiBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * This is the bundle class.
  */
-class MetaModelsAttributeTranslatedMultiBundle extends Bundle
+class MetaModelsAttributeTranslatedTableMultiBundle extends Bundle
 {
 }

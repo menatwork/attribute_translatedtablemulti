@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of MetaModels/attribute_translatedmulti.
+ * This file is part of MetaModels/attribute_translatedtablemulti.
  *
  * (c) 2018 MenAtWork.
  *
@@ -10,21 +10,21 @@
  * This project is provided in good faith and hope to be usable by anyone.
  *
  * @package    MetaModels
- * @subpackage AttributeTranslatedMulti
+ * @subpackage AttributeTranslatedTableMulti
  * @author     Andreas Dziemba <dziemba@men-at-work.de>
  * @copyright  2018 MenAtWork
  * @copyright  2018 The MetaModels team.
  * @filesource
  */
 
-namespace MetaModels\AttributeTranslatedMultiBundle\DependencyInjection;
+namespace MetaModels\AttributeTranslatedTableMultiBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
-class MetaModelsAttributeTranslatedMultiExtension extends Extension
+class MetaModelsAttributeTranslatedTableMultiExtension extends Extension
 {
     /**
      * {@inheritDoc}

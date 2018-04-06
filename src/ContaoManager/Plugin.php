@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of MetaModels/attribute_translatedmulti.
+ * This file is part of MetaModels/attribute_translatedtablemulti.
  *
  * (c) 2018 MenAtWork.
  *
@@ -11,20 +11,20 @@
  * This project is provided in good faith and hope to be usable by anyone.
  *
  * @package    MetaModels
- * @subpackage AttributeTranslatedMulti
+ * @subpackage AttributeTranslatedTableMulti
  * @author     Andreas Dziemba <dziemba@men-at-work.de>
  * @copyright  2018 MenAtWork
  * @copyright  2018 The MetaModels team.
  * @filesource
  */
 
-namespace MetaModels\AttributeTranslatedMultiBundle\ContaoManager;
+namespace MetaModels\AttributeTranslatedTableMultiBundle\ContaoManager;
 
 use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
-use MetaModels\AttributeTranslatedMultiBundle\MetaModelsAttributeTranslatedMultiBundle;
+use MetaModels\AttributeTranslatedTableMultiBundle\MetaModelsAttributeTranslatedTableMultiBundle;
 use MetaModels\CoreBundle\MetaModelsCoreBundle;
 
 /**
@@ -38,14 +38,14 @@ class Plugin implements BundlePluginInterface
     public function getBundles(ParserInterface $parser)
     {
         return [
-            BundleConfig::create(MetaModelsAttributeTranslatedMultiBundle::class)
+            BundleConfig::create(MetaModelsAttributeTranslatedTableMultiBundle::class)
                 ->setLoadAfter(
                     [
                         ContaoCoreBundle::class,
                         MetaModelsCoreBundle::class
                     ]
                 )
-                ->setReplace(['metamodelsattribute_translatedmulti'])
+                ->setReplace(['metamodelsattribute_translatedtablemulti', 'metamodelsattribute_translatedmulti'])
         ];
     }
 }

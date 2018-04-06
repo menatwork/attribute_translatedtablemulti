@@ -1,5 +1,5 @@
 {
-  "name": "menatwork/attribute_translatedmulti",
+  "name": "menatwork/attribute_translatedtablemulti",
   "description": "MetaModels attribute for dynamic translated multi table",
   "keywords": [
     "contao",
@@ -32,8 +32,8 @@
     }
   ],
   "support": {
-    "issues": "https://github.com/menatwork/attribute_translatedmulti/issues",
-    "source": "https://github.com/menatwork/attribute_translatedmulti"
+    "issues": "https://github.com/menatwork/attribute_translatedtablemulti/issues",
+    "source": "https://github.com/menatwork/attribute_translatedtablemulti"
   },
   "require": {
     "php": ">=5.4 | ^7.0",
@@ -48,15 +48,15 @@
   },
   "autoload": {
     "psr-4": {
-      "MetaModels\\AttributeTranslatedMultiBundle\\": "src"
+      "MetaModels\\AttributeTranslatedTableMultiBundle\\": "src"
     }
   },
   "extra": {
-    "contao-manager-plugin": "MetaModels\\AttributeTranslatedMultiBundle\\ContaoManager\\Plugin",
+    "contao-manager-plugin": "MetaModels\\AttributeTranslatedTableMultiBundle\\ContaoManager\\Plugin",
     "contao": {
       "transifex": {
         "project": "metamodels",
-        "prefix": "attribute_translatedmulti-",
+        "prefix": "attribute_translatedtablemulti-",
         "languages_cto": "src/Resources/contao/languages",
         "languages_tx": ".tx"
       }

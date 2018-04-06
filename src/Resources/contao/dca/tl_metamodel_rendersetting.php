@@ -13,8 +13,8 @@
  * @author     David Greminger <david.greminger@1up.io>
  * @copyright  2018 MenAtWork
  * @copyright  2018 The MetaModels team.
- * @license    https://github.com/menatwork/attribute_translatedmulti/blob/master/LICENSE LGPL-3.0
+ * @license    https://github.com/menatwork/attribute_translatedtablemulti/blob/master/LICENSE LGPL-3.0-or-later
  * @filesource
  */
 
-$GLOBALS['TL_DCA']['tl_metamodel_rendersetting']['metapalettes']['translatedmulti extends default'] = array();
+$GLOBALS['TL_DCA']['tl_metamodel_rendersetting']['metapalettes']['translatedtablemulti extends default'] = array();

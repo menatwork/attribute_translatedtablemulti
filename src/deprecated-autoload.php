@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of MetaModels/attribute_translatedmulti.
+ * This file is part of MetaModels/attribute_translatedtablemulti.
  *
  * (c) 2018 MenAtWork.
  *
@@ -10,20 +10,20 @@
  * This project is provided in good faith and hope to be usable by anyone.
  *
  * @package    MetaModels
- * @subpackage AttributeTranslatedMulti
+ * @subpackage AttributeTranslatedTableMulti
  * @author     Andreas Dziemba <dziemba@men-at-work.de>
  * @copyright  2018 MenAtWork.
  * @filesource
  */
 
-use MetaModels\AttributeTranslatedMultiBundle\Attribute\AttributeTypeFactory;
-use MetaModels\AttributeTranslatedMultiBundle\Attribute\TranslatedMulti;
+use MetaModels\AttributeTranslatedTableMultiBundle\Attribute\AttributeTypeFactory;
+use MetaModels\AttributeTranslatedTableMultiBundle\Attribute\TranslatedTableMulti;
 
 // This hack is to load the "old locations" of the classes.
 spl_autoload_register(
     function ($class) {
         static $classes = [
-            'MetaModels\Attribute\TranslatedMulti\TranslatedMulti'      => TranslatedMulti::class,
+            'MetaModels\Attribute\TranslatedMulti\TranslatedMulti'      => TranslatedTableMulti::class,
             'MetaModels\Attribute\TranslatedMulti\AttributeTypeFactory' => AttributeTypeFactory::class
         ];
 

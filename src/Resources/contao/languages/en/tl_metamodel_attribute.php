@@ -7,15 +7,15 @@
  * data in each collection.
  *
  * @package    MetaModels
- * @subpackage AttributeTranslatedMulti
+ * @subpackage AttributeTranslatedTableMulti
  * @author     David Maack <david.maack@arcor.de>
  * @author     Stefan Heimes <stefan_heimes@hotmail.com>
  * @copyright  2018 MenAtWork
  * @copyright  2018 The MetaModels team.
- * @license    https://github.com/menatwork/attribute_translatedmulti/blob/master/LICENSE LGPL-3.0
+ * @license    https://github.com/menatwork/attribute_translatedtablemulti/blob/master/LICENSE LGPL-3.0-or-later
  */
 
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_metamodel_attribute']['typeOptions']['translatedmulti'] = 'Translated multi table';
+$GLOBALS['TL_LANG']['tl_metamodel_attribute']['typeOptions']['translatedtablemulti'] = 'Translated multi table';
