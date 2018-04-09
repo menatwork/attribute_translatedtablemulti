@@ -14,9 +14,8 @@
  * @subpackage AttributeTranslatedTableMulti
  * @author     David Molineus <david.molineus@netzmacht.de>
  * @author     Andreas Dziemba <dziemba@men-at-work.de>
- * @copyright  2018 MenAtWork
  * @copyright  2018 The MetaModels Team.
- * @license    https://github.com/menatwork/attribute_translatedtablemulti/blob/master/LICENSE master/LICENSE LGPL-3.0-or-later
+ * @license    https://github.com/MetaModels/attribute_translatedtablemulti/blob/master/LICENSE master/LICENSE LGPL-3.0-or-later
  * @filesource
  */
 

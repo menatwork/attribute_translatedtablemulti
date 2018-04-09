@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The MetaModels extension allows the creation of multiple collections of custom items,
  * each with its own unique set of selectable attributes, with attribute extendability.
@@ -11,9 +12,8 @@
  * @author     Christian Schiffler <c.schiffler@cyberspectrum.de>
  * @author     Sven Baumann <baumann.sv@gmail.com>
  * @author     Andreas Dziemba <dziemba@men-at-work.de>
- * @copyright  2018 MenAtWork
  * @copyright  2018 The MetaModels Team.
- * @license    https://github.com/menatwork/attribute_translatedtablemulti/blob/master/LICENSE master/LICENSE LGPL-3.0-or-later
+ * @license    https://github.com/MetaModels/attribute_translatedtablemulti/blob/master/LICENSE master/LICENSE LGPL-3.0-or-later
  * @filesource
  */
 

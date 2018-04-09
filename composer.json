@@ -1,5 +1,5 @@
 {
-  "name": "menatwork/attribute_translatedtablemulti",
+  "name": "metamodels/attribute_translatedtablemulti",
   "description": "MetaModels attribute for dynamic translated multi table",
   "keywords": [
     "contao",
@@ -11,7 +11,7 @@
     "multicolumnwizard"
   ],
   "type": "contao-bundle",
-  "homepage": "http://www.men-at-work.de/",
+  "homepage": "http://now.metamodel.me/",
   "license": "LGPL-3.0-or-later",
   "authors": [
     {
@@ -32,8 +32,8 @@
     }
   ],
   "support": {
-    "issues": "https://github.com/menatwork/attribute_translatedtablemulti/issues",
-    "source": "https://github.com/menatwork/attribute_translatedtablemulti"
+    "issues": "https://github.com/MetaModels/attribute_translatedtablemulti/issues",
+    "source": "https://github.com/MetaModels/attribute_translatedtablemulti"
   },
   "require": {
     "php": ">=5.4 | ^7.0",

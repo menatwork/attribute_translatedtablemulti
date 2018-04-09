@@ -1,13 +1,13 @@
 <?php
+
 /**
  * This is the MetaModelAttribute class for handling translated table multi fields.
  *
  * @package    MetaModels
  * @subpackage AttributeTranslatedTableMulti
  * @author     Andreas Dziemba <dziemba@men-at-work.de>
- * @copyright  2018 MenAtWork
  * @copyright  2018 The MetaModels team.
- * @license    https://github.com/menatwork/attribute_translatedtablemulti/blob/master/LICENSE LGPL-3.0-or-later
+ * @license    https://github.com/MetaModels/attribute_translatedtablemulti/blob/master/LICENSE LGPL-3.0-or-later
  */
 
 class TranslatedTableMultiRunOnce extends Controller
