@@ -42,10 +42,10 @@ class AttributeTypeFactory extends AbstractAttributeTypeFactory
     public function __construct(Connection $connection)
     {
         parent::__construct();
-        $this->typeName     = 'translatedtablemulti';
-        $this->typeIcon     = 'bundles/metamodelsattributetranslatedtablemulti/translatedtablemulti.png';
-        $this->typeClass    = TranslatedTableMulti::class;
-        $this->connection   = $connection;
+        $this->typeName   = 'translatedtablemulti';
+        $this->typeIcon   = 'bundles/metamodelsattributetranslatedtablemulti/translatedtablemulti.png';
+        $this->typeClass  = TranslatedTableMulti::class;
+        $this->connection = $connection;
     }
 
     /**

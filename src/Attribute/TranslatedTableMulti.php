@@ -105,9 +105,8 @@ class TranslatedTableMulti extends Base implements ITranslated, IComplex
     public function getFieldDefinition($arrOverrides = array())
     {
         // Get table and column
-        $strTable     = $this->getMetaModel()->getTableName();
-        $strField     = $this->getColName();
-        $arrColLabels = null;
+        $strTable = $this->getMetaModel()->getTableName();
+        $strField = $this->getColName();
 
         $arrFieldDef                         = parent::getFieldDefinition($arrOverrides);
         $arrFieldDef['inputType']            = 'multiColumnWizard';
@@ -122,7 +121,7 @@ class TranslatedTableMulti extends Base implements ITranslated, IComplex
                 unset($config['columnFields'][$col]);
             }
 
-            // Build the array();
+            // Build the array
             $arrFieldDef['inputType'] = 'multiColumnWizard';
             $arrFieldDef['eval']      = $config;
         }
@@ -130,6 +129,15 @@ class TranslatedTableMulti extends Base implements ITranslated, IComplex
         return $arrFieldDef;
     }
 
+    /**
+     * Build the where clause
+     *
+     * @param QueryBuilder $queryBuilder
+     * @param $mixIds
+     * @param null         $strLangCode
+     * @param null         $intRow
+     * @param null         $intCol
+     */
     protected function buildWhere(
         QueryBuilder $queryBuilder,
         $mixIds,
@@ -224,9 +232,9 @@ class TranslatedTableMulti extends Base implements ITranslated, IComplex
     {
         return array(
             'tstamp'   => time(),
-            'value'    => (string)$arrCell['value'],
+            'value'    => (string) $arrCell['value'],
             'att_id'   => $this->get('id'),
-            'row'      => (int)$arrCell['row'],
+            'row'      => (int) $arrCell['row'],
             'col'      => $arrCell['col'],
             'item_id'  => $intId,
             'langcode' => $strLangCode,

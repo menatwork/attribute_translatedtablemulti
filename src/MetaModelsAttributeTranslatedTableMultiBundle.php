@@ -14,6 +14,7 @@
  * @subpackage AttributeTranslatedTableMulti
  * @author     Andreas Dziemba <dziemba@men-at-work.de>
  * @copyright  2018 The MetaModels team.
+ * @license    https://github.com/MetaModels/attribute_translatedtablemulti/blob/master/LICENSE LGPL-3.0-or-later
  * @filesource
  */
 namespace MetaModels\AttributeTranslatedTableMultiBundle;

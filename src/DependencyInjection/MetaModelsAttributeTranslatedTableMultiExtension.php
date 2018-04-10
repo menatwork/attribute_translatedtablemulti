@@ -14,6 +14,7 @@
  * @subpackage AttributeTranslatedTableMulti
  * @author     Andreas Dziemba <dziemba@men-at-work.de>
  * @copyright  2018 The MetaModels team.
+ * @license    https://github.com/MetaModels/attribute_translatedtablemulti/blob/master/LICENSE LGPL-3.0-or-later
  * @filesource
  */
 
@@ -24,6 +25,11 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
+/**
+ * Class MetaModelsAttributeTranslatedTableMultiExtension
+ *
+ * @package MetaModels\AttributeTranslatedTableMultiBundle\DependencyInjection
+ */
 class MetaModelsAttributeTranslatedTableMultiExtension extends Extension
 {
     /**

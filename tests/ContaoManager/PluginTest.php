@@ -65,6 +65,6 @@ class PluginTest extends TestCase
         $bundleConfig = $bundles[0];
 
         $this->assertEquals($bundleConfig->getLoadAfter(), [ContaoCoreBundle::class, MetaModelsCoreBundle::class]);
-        $this->assertEquals($bundleConfig->getReplace(), ['metamodelsattribute_translatedtablemulti']);
+        $this->assertEquals($bundleConfig->getReplace(), ['metamodelsattribute_translatedtablemulti', 'metamodelsattribute_translatedmulti']);
     }
 }
