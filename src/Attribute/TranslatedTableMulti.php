@@ -101,6 +101,8 @@ class TranslatedTableMulti extends Base implements ITranslated, IComplex
 
     /**
      * {@inheritDoc}
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function getFieldDefinition($arrOverrides = array())
     {
@@ -186,7 +188,7 @@ class TranslatedTableMulti extends Base implements ITranslated, IComplex
 
         $widgetValue = array();
         foreach ($varValue as $row) {
-            foreach ($row as $key => $col) {
+            foreach ($row as $col) {
                 $widgetValue[$col['row']]['col_' . $col['col']] = $col['value'];
             }
         }

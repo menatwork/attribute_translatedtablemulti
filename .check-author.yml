@@ -4,3 +4,11 @@ ignore:
 
 exclude:
   - languages
+
+
+mapping:
+    "Andreas Dziemba <dziemba@men-at-work.de>":
+        - "Andreas Dziemba <dziemba@men-at-work.de>"
+        - "Andreas Dziemba <adziemba@web.de>"
+        - "adziemba <adziemba@web.de>"
+        - "Andreas Dziemba <dziemba@men-at-work-de>"

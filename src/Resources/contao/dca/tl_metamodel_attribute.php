@@ -13,6 +13,7 @@
  * @author     David Greminger <david.greminger@1up.io>
  * @author     Sven Baumann <baumann.sv@gmail.com>
  * @author     Andreas Dziemba <dziemba@men-at-work.de>
+ * @author     Stefan Heimes <stefan_heimes@hotmail.com>
  * @copyright  2018 The MetaModels team.
  * @license    https://github.com/MetaModels/attribute_translatedtablemulti/blob/master/LICENSE LGPL-3.0-or-later
  * @filesource
