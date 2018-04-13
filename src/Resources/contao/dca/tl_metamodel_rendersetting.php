@@ -19,4 +19,18 @@
  */
 
 $GLOBALS['TL_DCA']['tl_metamodel_rendersetting']['metapalettes']['translatedtablemulti extends default']
-    = array();
+    = array(
+    '+advanced' => array('translatedtablemulti_hide_tablehead'),
+);
+
+$GLOBALS['TL_DCA']['tl_metamodel_rendersetting']['fields']['translatedtablemulti_hide_tablehead'] = array
+(
+    'label'     => &$GLOBALS['TL_LANG']['tl_metamodel_rendersetting']['translatedtablemulti_hide_tablehead'],
+    'exclude'   => true,
+    'inputType' => 'checkbox',
+    'eval'      => array
+    (
+        'tl_class' => 'clr w50'
+    ),
+    'sql'       => "varchar(1) NOT NULL default '0'",
+);

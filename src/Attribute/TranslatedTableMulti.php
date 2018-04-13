@@ -138,14 +138,14 @@ class TranslatedTableMulti extends Base implements ITranslated, IComplex
      * @param $mixIds
      * @param null         $strLangCode
      * @param null         $intRow
-     * @param null         $intCol
+     * @param null         $varCol
      */
     protected function buildWhere(
         QueryBuilder $queryBuilder,
         $mixIds,
         $strLangCode = null,
         $intRow = null,
-        $intCol = null
+        $varCol = null
     ) {
         $queryBuilder
             ->andWhere('att_id = :att_id')
@@ -163,11 +163,11 @@ class TranslatedTableMulti extends Base implements ITranslated, IComplex
             }
         }
 
-        if (is_int($intRow) && is_int($intCol)) {
+        if (is_int($intRow) && is_string($varCol)) {
             $queryBuilder
                 ->andWhere('row = :row AND col = :col')
                 ->setParameter('row', $intRow)
-                ->setParameter('col', $intCol);
+                ->setParameter('col', $varCol);
         }
 
         if ($strLangCode) {

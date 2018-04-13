@@ -1,5 +1,11 @@
 <table class="translatedtablemulti<?php echo $this->additional_class; ?>">
-	<?php foreach ($this->raw as $k => $row) : ?><tr>
-		<?php foreach ($row as $kk =>$col): ?><td><?php echo $col['value']; ?></td><?php endforeach; ?>
-	</tr><?php endforeach;?>
+    <tbody>
+    <?php foreach ($this->raw as $k => $row) : ?>
+    <tr class="<?= ($k % 2 == 0 ? 'odd' : 'even'); ?>">
+		<?php foreach ($row as $kk =>$col): ?>
+            <td><?php echo $col['value']; ?></td>
+        <?php endforeach; ?>
+	</tr>
+    <?php endforeach;?>
+    </tbody>
 </table>

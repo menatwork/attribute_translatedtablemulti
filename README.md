@@ -1,10 +1,18 @@
-Translated table multi
-======================
+[![Build Status](https://travis-ci.org/MetaModels/attribute_translatedtablemulti.svg)](https://travis-ci.org/MetaModels/attribute_translatedtablemulti)
+[![Latest Version tagged](http://img.shields.io/github/tag/MetaModels/attribute_translatedtablemulti.svg)](https://github.com/MetaModels/attribute_translatedtablemulti/tags)
+[![Latest Version on Packagist](http://img.shields.io/packagist/v/MetaModels/attribute_translatedtablemulti.svg)](https://packagist.org/packages/MetaModels/attribute_translatedtablemulti)
+[![Installations via composer per month](http://img.shields.io/packagist/dm/MetaModels/attribute_translatedtablemulti.svg)](https://packagist.org/packages/MetaModels/attribute_translatedtablemulti)
 
-The translated table multi attribute.
+TranslatedTableMulti
+======================
+#####Original idea by Byteworks:
+- [Ronny Binder](mailto:rb@bytworks.ch)
+- [Michael Bischof](mailto:mb@byteworks.ch)
+
+####The TranslatedTableMulti attribute.
 
 With this attribute you are able to create complex table structures with the MultiColumnWizard.
-Create a config in the initConfig or somewhere else and write something like this:
+Create the configuration in the system/config/dcaconfig.php, system/config/localconfig.php or somewhere else where the config is loaded and write something like this:
 
 ```php
 $GLOBALS['TL_CONFIG']['metamodelsattribute_multi']['mm_test']['multi_test'] = array(

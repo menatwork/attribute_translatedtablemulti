@@ -51,5 +51,13 @@ class TranslatedTableMultiRunOnce extends Controller
                 ->prepare("UPDATE tl_metamodel_attribute SET type='translatedtablemulti' WHERE type='translatedmulti'")
                 ->execute();
         }
+
+        $this->Database
+            ->prepare("UPDATE tl_metamodel_attribute SET type='translatedtablemulti' WHERE type='translatedmulti'")
+            ->execute();
+
+        $this->Database
+            ->prepare("UPDATE tl_metamodel_rendersetting SET template='mm_attr_translatedtablemulti' WHERE template='mm_attr_translatedmulti'")
+            ->execute();
     }
 }
