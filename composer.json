@@ -77,12 +77,11 @@
       }
     },
     "branch-alias": {
-      "dev-master":  "2.1.x-dev",
-      "dev-develop": "2.2.x-dev"
+      "dev-master":  "2.0.x-dev",
+      "dev-develop": "2.1.x-dev"
     }
   },
   "minimum-stability": "dev",
-  "prefer-stable": true,
   "repositories": [
     {
       "type": "git",

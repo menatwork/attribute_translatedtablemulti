@@ -1,11 +1,28 @@
+<?php
+$strFallbackLang = $this->attribute->getMetaModel()->getFallbackLanguage();
+$strActiveLang   = $this->attribute->getMetaModel()->getActiveLanguage();
+$strActiveLang   = array_key_exists($strActiveLang, $this->attribute->getMetaModel()->get('languages')) ?
+    $strActiveLang :
+    $strFallbackLang;
+?>
+
 <table class="translatedtablemulti<?php echo $this->additional_class; ?>">
+<?php $countCol = count($this->attribute->get('translatedtablemulti_cols')[$strFallbackLang]); if (!$this->settings->get('translatedtablemulti_hide_tablehead')) : ?>
+    <thead>
+        <tr>
+            <?php foreach (is_array($this->attribute->get('translatedtablemulti_cols')[$strActiveLang]) ? $this->attribute->get('translatedtablemulti_cols')[$strActiveLang]: array() as $headCol) : ?>
+                <th><?= $headCol['rowLabel'] ?></th>
+            <?php endforeach; ?>
+        </tr>
+    </thead>
+<?php endif; ?>
     <tbody>
-    <?php foreach ($this->raw as $k => $row) : ?>
-    <tr class="<?= ($k % 2 == 0 ? 'odd' : 'even'); ?>">
-		<?php foreach ($row as $kk =>$col): ?>
-            <td><?php echo $col['value']; ?></td>
-        <?php endforeach; ?>
-	</tr>
-    <?php endforeach;?>
+        <?php foreach ($this->raw as $k => $row) : ?>
+            <tr class="<?= ($k % 2 == 0 ? 'odd' : 'even'); ?>">
+                <?php foreach ($row as $kk =>$col): ?>
+                    <td><?php echo $col['value']; ?></td>
+                <?php endforeach; ?>
+            </tr>
+        <?php endforeach;?>
     </tbody>
 </table>
