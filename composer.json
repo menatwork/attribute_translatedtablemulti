@@ -1,6 +1,6 @@
 {
   "name": "metamodels/attribute_translatedtablemulti",
-  "description": "MetaModels attribute for dynamic translated multi table",
+  "description": "MetaModels attribute for dynamic translated multi attribute table",
   "keywords": [
     "contao",
     "metamodels",

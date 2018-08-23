@@ -5,11 +5,6 @@
 
 The translated multi attribute table
 ======================
-#####Original idea by Byteworks:
-- [Ronny Binder](mailto:rb@bytworks.ch)
-- [Michael Bischof](mailto:mb@byteworks.ch)
-
-The translated multi attribute table.
 
 With this attribute you are able to create complex table structures with the MultiColumnWizard.
 Create the configuration in the system/config/dcaconfig.php or somewhere else where the config is loaded and write something like this:
@@ -53,3 +48,7 @@ $GLOBALS['TL_CONFIG']['metamodelsattribute_multi']['mm_test']['multi_test'] = ar
     ),
 );
 ```
+
+#####Original idea by Byteworks:
+- [Ronny Binder](mailto:rb@bytworks.ch)
+- [Michael Bischof](mailto:mb@byteworks.ch)
