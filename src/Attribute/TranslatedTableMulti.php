@@ -208,7 +208,7 @@ class TranslatedTableMulti extends Base implements ITranslated, IComplex
         $newValue = array();
         foreach ($varValue as $k => $row) {
             foreach ($row as $kk => $col) {
-                $kk = str_replace('col_', '', $kk);
+                $kk = substr($kk, 4);
 
                 $newValue[$k][$kk]['value'] = $col;
                 $newValue[$k][$kk]['col']   = $kk;
